@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wshop - Solutions Digitales pour PME au Sénégal</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#3B82F6',secondary:'#0F172A'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Open Sans', sans-serif;
+scroll-behavior: smooth;
+}
+h1, h2, h3, h4, h5, h6 {
+font-family: 'Poppins', sans-serif;
+}
+.logo {
+font-family: 'Pacifico', serif;
+}
+.service-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 25px rgba(30, 136, 229, 0.1);
+}
+.project-card:hover .project-overlay {
+opacity: 1;
+}
+.project-card:hover img {
+transform: scale(1.05);
+}
+input:focus, textarea:focus {
+outline: none;
+border-color: #1E88E5;
+box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
+}
+.custom-checkbox {
+position: relative;
+padding-left: 30px;
+cursor: pointer;
+user-select: none;
+}
+.custom-checkbox input {
+position: absolute;
+opacity: 0;
+cursor: pointer;
+}
+.checkmark {
+position: absolute;
+top: 0;
+left: 0;
+height: 20px;
+width: 20px;
+background-color: #fff;
+border: 2px solid #e2e8f0;
+border-radius: 4px;
+}
+.custom-checkbox:hover input ~ .checkmark {
+border-color: #1E88E5;
+}
+.custom-checkbox input:checked ~ .checkmark {
+background-color: #1E88E5;
+border-color: #1E88E5;
+}
+.checkmark:after {
+content: "";
+position: absolute;
+display: none;
+}
+.custom-checkbox input:checked ~ .checkmark:after {
+display: block;
+}
+.custom-checkbox .checkmark:after {
+left: 6px;
+top: 2px;
+width: 5px;
+height: 10px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+.custom-switch {
+position: relative;
+display: inline-block;
+width: 50px;
+height: 24px;
+}
+.custom-switch input {
+opacity: 0;
+width: 0;
+height: 0;
+}
+.slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #e2e8f0;
+transition: .4s;
+border-radius: 34px;
+}
+.slider:before {
+position: absolute;
+content: "";
+height: 18px;
+width: 18px;
+left: 3px;
+bottom: 3px;
+background-color: white;
+transition: .4s;
+border-radius: 50%;
+}
+input:checked + .slider {
+background-color: #1E88E5;
+}
+input:checked + .slider:before {
+transform: translateX(26px);
+}
+</style>
+</head>
+<body class="bg-white">
+<!-- Header -->
+<header class="fixed top-0 left-0 w-full bg-white shadow-sm z-50">
+<div class="container mx-auto px-4 py-4 flex items-center justify-between">
+<a href="#" class="flex items-center">
+<img src="https://static.readdy.ai/image/74900c922315346346900da9821ee512/28ad02aa5a6e1564a7f63a3c5110f710.png" alt="Wshop Logo" class="h-10">
+</a>
+<!-- Desktop Menu -->
+<nav class="hidden md:flex items-center space-x-8">
+<a href="#accueil" class="text-gray-800 hover:text-primary font-medium transition-colors">Accueil</a>
+<a href="#services" class="text-gray-800 hover:text-primary font-medium transition-colors">Services</a>
+<a href="#realisations" class="text-gray-800 hover:text-primary font-medium transition-colors">Réalisations</a>
+<a href="#apropos" class="text-gray-800 hover:text-primary font-medium transition-colors">À propos</a>
+<a href="#contact" class="text-gray-800 hover:text-primary font-medium transition-colors">Contact</a>
+<a href="#contact" class="bg-secondary text-white px-5 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap">Demander un devis</a>
+</nav>
+<!-- Mobile Menu Button -->
+<div class="md:hidden w-10 h-10 flex items-center justify-center cursor-pointer" id="mobileMenuBtn">
+<i class="ri-menu-line ri-lg"></i>
+</div>
+</div>
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+<div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+<a href="#accueil" class="text-gray-800 hover:text-primary font-medium py-2 transition-colors">Accueil</a>
+<a href="#services" class="text-gray-800 hover:text-primary font-medium py-2 transition-colors">Services</a>
+<a href="#realisations" class="text-gray-800 hover:text-primary font-medium py-2 transition-colors">Réalisations</a>
+<a href="#apropos" class="text-gray-800 hover:text-primary font-medium py-2 transition-colors">À propos</a>
+<a href="#contact" class="text-gray-800 hover:text-primary font-medium py-2 transition-colors">Contact</a>
+<a href="#contact" class="bg-secondary text-white px-5 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-colors text-center whitespace-nowrap">Demander un devis</a>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section id="accueil" class="pt-24 md:pt-0 relative min-h-screen flex items-center" style="background-image: url('https://readdy.ai/api/search-image?query=modern%2520tech%2520office%2520scene%2520in%2520Africa%2520with%2520young%2520professionals%2520working%2520on%2520digital%2520devices%252C%2520bright%2520and%2520airy%2520space%2520with%2520natural%2520light%252C%2520subtle%2520African%2520design%2520elements%252C%2520blue%2520and%2520orange%2520color%2520accents%252C%2520clean%2520and%2520minimal%2520aesthetic%252C%2520gradient%2520from%2520white%2520to%2520light%2520blue%2520on%2520left%2520side&width=1920&height=1080&seq=hero1&orientation=landscape'); background-size: cover; background-position: center right;">
+<div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent"></div>
+<div class="container mx-auto px-4 relative z-10 w-full">
+<div class="max-w-2xl">
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">Accélérez votre transformation digitale avec Wshop</h1>
+<p class="text-lg md:text-xl text-gray-700 mb-8">Nous développons des solutions digitales sur mesure pour propulser les PME sénégalaises vers le succès numérique. Expertise locale, vision globale.</p>
+<div class="flex flex-col sm:flex-row gap-4">
+<a href="#contact" class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-colors text-center whitespace-nowrap">Demander un devis</a>
+<a href="#services" class="bg-white text-primary border border-primary px-8 py-3 !rounded-button font-medium hover:bg-primary/5 transition-colors text-center whitespace-nowrap">Découvrir nos services</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section id="services" class="py-20 bg-gray-50">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Nos Services</h2>
+<p class="text-lg text-gray-700 max-w-3xl mx-auto">Nous proposons une gamme complète de solutions digitales pour accompagner votre entreprise dans sa transformation numérique.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Service 1 -->
+<div class="service-card bg-white p-8 rounded-lg shadow-md transition-all duration-300">
+<div class="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
+<i class="ri-code-s-slash-line ri-2x text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Développement Web</h3>
+<p class="text-gray-700 mb-4">Sites vitrines, e-commerce, applications web sur mesure adaptés à vos besoins spécifiques.</p>
+<a href="#contact" class="text-primary font-medium inline-flex items-center hover:underline">
+En savoir plus
+<i class="ri-arrow-right-line ml-2"></i>
+</a>
+</div>
+<!-- Service 2 -->
+<div class="service-card bg-white p-8 rounded-lg shadow-md transition-all duration-300">
+<div class="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
+<i class="ri-smartphone-line ri-2x text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Développement Mobile</h3>
+<p class="text-gray-700 mb-4">Applications mobiles natives et hybrides pour iOS et Android, optimisées pour le marché africain.</p>
+<a href="#contact" class="text-primary font-medium inline-flex items-center hover:underline">
+En savoir plus
+<i class="ri-arrow-right-line ml-2"></i>
+</a>
+</div>
+<!-- Service 3 -->
+<div class="service-card bg-white p-8 rounded-lg shadow-md transition-all duration-300">
+<div class="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
+<i class="ri-palette-line ri-2x text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Image de marque</h3>
+<p class="text-gray-700 mb-4">Création de logo, charte graphique, identité visuelle et supports de communication impactants.</p>
+<a href="#contact" class="text-primary font-medium inline-flex items-center hover:underline">
+En savoir plus
+<i class="ri-arrow-right-line ml-2"></i>
+</a>
+</div>
+<!-- Service 4 -->
+<div class="service-card bg-white p-8 rounded-lg shadow-md transition-all duration-300">
+<div class="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
+<i class="ri-line-chart-line ri-2x text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Conseil Stratégique</h3>
+<p class="text-gray-700 mb-4">Accompagnement personnalisé pour définir et mettre en œuvre votre stratégie digitale.</p>
+<a href="#contact" class="text-primary font-medium inline-flex items-center hover:underline">
+En savoir plus
+<i class="ri-arrow-right-line ml-2"></i>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Choose Us Section -->
+<section class="py-20 bg-white">
+<div class="container mx-auto px-4">
+<div class="flex flex-col lg:flex-row items-center gap-12">
+<div class="lg:w-1/2">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Pourquoi choisir Wshop ?</h2>
+<p class="text-lg text-gray-700 mb-8">Chez Wshop, nous comprenons les défis uniques auxquels font face les entreprises sénégalaises. Notre approche combine expertise locale et standards internationaux.</p>
+<div class="space-y-6">
+<div class="flex items-start">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 shrink-0">
+<i class="ri-user-heart-line ri-lg text-primary"></i>
+</div>
+<div>
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Expertise locale</h3>
+<p class="text-gray-700">Notre équipe 100% sénégalaise comprend parfaitement les réalités du marché local et les besoins spécifiques de votre entreprise.</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 shrink-0">
+<i class="ri-rocket-line ri-lg text-primary"></i>
+</div>
+<div>
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Innovation constante</h3>
+<p class="text-gray-700">Nous restons à la pointe des dernières technologies pour vous proposer des solutions modernes et performantes.</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 shrink-0">
+<i class="ri-hand-heart-line ri-lg text-primary"></i>
+</div>
+<div>
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Accompagnement personnalisé</h3>
+<p class="text-gray-700">Nous vous accompagnons à chaque étape de votre projet, de la conception à la mise en ligne et au-delà.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:w-1/2">
+<div class="relative rounded-xl overflow-hidden shadow-xl">
+<img src="https://readdy.ai/api/search-image?query=diverse%2520African%2520team%2520of%2520young%2520professionals%2520in%2520a%2520modern%2520tech%2520office%2520environment%252C%2520collaborating%2520on%2520digital%2520projects%252C%2520using%2520computers%2520and%2520tablets%252C%2520bright%2520and%2520airy%2520space%2520with%2520blue%2520accents%252C%2520professional%2520setting%2520with%2520glass%2520walls%2520and%2520modern%2520furniture&width=600&height=500&seq=team1&orientation=landscape" alt="L'équipe Wshop" class="w-full h-full object-cover object-top">
+<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+<p class="text-white font-medium">Notre équipe dynamique et passionnée</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Réalisations Section -->
+<section id="realisations" class="py-20 bg-gray-50">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Nos Réalisations</h2>
+<p class="text-lg text-gray-700 max-w-3xl mx-auto">Découvrez quelques-uns de nos projets récents et comment nous avons aidé nos clients à atteindre leurs objectifs digitaux.</p>
+</div>
+<!-- Project Filters -->
+<div class="flex flex-wrap justify-center mb-12 gap-2">
+<button class="filter-btn active bg-primary text-white px-6 py-2 !rounded-button font-medium transition-colors whitespace-nowrap" data-filter="all">Tous</button>
+<button class="filter-btn bg-white text-gray-700 px-6 py-2 !rounded-button font-medium hover:bg-gray-100 transition-colors whitespace-nowrap" data-filter="web">Web</button>
+<button class="filter-btn bg-white text-gray-700 px-6 py-2 !rounded-button font-medium hover:bg-gray-100 transition-colors whitespace-nowrap" data-filter="mobile">Mobile</button>
+<button class="filter-btn bg-white text-gray-700 px-6 py-2 !rounded-button font-medium hover:bg-gray-100 transition-colors whitespace-nowrap" data-filter="branding">Branding</button>
+</div>
+<!-- Projects Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Project 1 -->
+<div class="project-card group relative rounded-lg overflow-hidden shadow-md" data-category="web">
+<img src="https://readdy.ai/api/search-image?query=professional%2520e-commerce%2520website%2520interface%2520for%2520African%2520fashion%2520brand%252C%2520clean%2520modern%2520design%2520with%2520blue%2520and%2520orange%2520accents%252C%2520showing%2520product%2520listings%2520and%2520navigation%252C%2520displayed%2520on%2520a%2520laptop%2520screen%2520in%2520a%2520bright%2520office%2520environment&width=400&height=300&seq=proj1&orientation=landscape" alt="Projet E-commerce" class="w-full h-64 object-cover object-top transition-transform duration-300">
+<div class="project-overlay absolute inset-0 bg-primary/80 flex flex-col justify-end p-6 opacity-0 transition-opacity duration-300">
+<h3 class="text-xl font-semibold text-white mb-2">Plateforme E-commerce</h3>
+<p class="text-white/90 mb-4">Site e-commerce complet pour une marque de mode sénégalaise avec paiement mobile intégré.</p>
+<div class="flex gap-2">
+<span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full">Web</span>
+<span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full">E-commerce</span>
+</div>
+</div>
+</div>
+<!-- Project 2 -->
+<div class="project-card group relative rounded-lg overflow-hidden shadow-md" data-category="mobile">
+<img src="https://readdy.ai/api/search-image?query=mobile%2520app%2520interface%2520for%2520food%2520delivery%2520service%2520in%2520Senegal%252C%2520showing%2520restaurant%2520listings%2520and%2520ordering%2520process%252C%2520displayed%2520on%2520a%2520smartphone%2520held%2520by%2520African%2520hand%252C%2520clean%2520design%2520with%2520blue%2520and%2520orange%2520color%2520scheme&width=400&height=300&seq=proj2&orientation=landscape" alt="Application mobile" class="w-full h-64 object-cover object-top transition-transform duration-300">
+<div class="project-overlay absolute inset-0 bg-primary/80 flex flex-col justify-end p-6 opacity-0 transition-opacity duration-300">
+<h3 class="text-xl font-semibold text-white mb-2">Application de livraison</h3>
+<p class="text-white/90 mb-4">Application mobile pour un service de livraison de repas à Dakar avec géolocalisation.</p>
+<div class="flex gap-2">
+<span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full">Mobile</span>
+<span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full">iOS & Android</span>
+</div>
+</div>
+</div>
+<!-- Project 3 -->
+<div class="project-card group relative rounded-lg overflow-hidden shadow-md" data-category="branding">
+<img src="https://readdy.ai/api/search-image?query=branding%2520materials%2520for%2520a%2520Senegalese%2520company%252C%2520including%2520logo%252C%2520business%2520cards%252C%2520and%2520stationery%2520laid%2520out%2520on%2520a%2520wooden%2520desk%252C%2520modern%2520design%2520with%2520subtle%2520African%2520patterns%252C%2520blue%2520and%2520orange%2520color%2520scheme&width=400&height=300&seq=proj3&orientation=landscape" alt="Branding" class="w-full h-64 object-cover object-top transition-transform duration-300">
+<div class="project-overlay absolute inset-0 bg-primary/80 flex flex-col justify-end p-6 opacity-0 transition-opacity duration-300">
+<h3 class="text-xl font-semibold text-white mb-2">Identité visuelle</h3>
+<p class="text-white/90 mb-4">Création complète de l'identité visuelle pour une fintech sénégalaise en pleine croissance.</p>
+<div class="flex gap-2">
+<span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full">Branding</span>
+<span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full">Design</span>
+</div>
+</div>
+</div>
+<!-- Project 4 -->
+<div class="project-card group relative rounded-lg overflow-hidden shadow-md" data-category="web">
+<img src="https://readdy.ai/api/search-image?query=responsive%2520website%2520design%2520for%2520a%2520Senegalese%2520tourism%2520company%252C%2520showing%2520desktop%2520and%2520mobile%2520versions%2520side%2520by%2520side%252C%2520beautiful%2520imagery%2520of%2520Senegalese%2520landscapes%252C%2520clean%2520modern%2520interface%2520with%2520blue%2520accents&width=400&height=300&seq=proj4&orientation=landscape" alt="Site web touristique" class="w-full h-64 object-cover object-top transition-transform duration-300">
+<div class="project-overlay absolute inset-0 bg-primary/80 flex flex-col justify-end p-6 opacity-0 transition-opacity duration-300">
+<h3 class="text-xl font-semibold text-white mb-2">Site web touristique</h3>
+<p class="text-white/90 mb-4">Plateforme de réservation d'expériences touristiques au Sénégal, multilingue et responsive.</p>
+<div class="flex gap-2">
+<span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full">Web</span>
+<span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full">Tourisme</span>
+</div>
+</div>
+</div>
+<!-- Project 5 -->
+<div class="project-card group relative rounded-lg overflow-hidden shadow-md" data-category="mobile">
+<img src="https://readdy.ai/api/search-image?query=fintech%2520mobile%2520app%2520interface%2520for%2520money%2520transfer%2520service%2520in%2520West%2520Africa%252C%2520showing%2520transaction%2520screens%2520on%2520smartphone%252C%2520modern%2520clean%2520design%2520with%2520blue%2520and%2520orange%2520color%2520scheme%252C%2520displayed%2520in%2520African%2520context&width=400&height=300&seq=proj5&orientation=landscape" alt="Application fintech" class="w-full h-64 object-cover object-top transition-transform duration-300">
+<div class="project-overlay absolute inset-0 bg-primary/80 flex flex-col justify-end p-6 opacity-0 transition-opacity duration-300">
+<h3 class="text-xl font-semibold text-white mb-2">Application Fintech</h3>
+<p class="text-white/90 mb-4">Solution de paiement mobile pour faciliter les transferts d'argent en Afrique de l'Ouest.</p>
+<div class="flex gap-2">
+<span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full">Mobile</span>
+<span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full">Fintech</span>
+</div>
+</div>
+</div>
+<!-- Project 6 -->
+<div class="project-card group relative rounded-lg overflow-hidden shadow-md" data-category="branding">
+<img src="https://readdy.ai/api/search-image?query=social%2520media%2520campaign%2520materials%2520for%2520a%2520Senegalese%2520brand%252C%2520showing%2520Instagram%2520and%2520Facebook%2520posts%2520with%2520cohesive%2520design%252C%2520modern%2520African%2520aesthetic%252C%2520blue%2520and%2520orange%2520color%2520scheme%252C%2520displayed%2520on%2520devices&width=400&height=300&seq=proj6&orientation=landscape" alt="Campagne réseaux sociaux" class="w-full h-64 object-cover object-top transition-transform duration-300">
+<div class="project-overlay absolute inset-0 bg-primary/80 flex flex-col justify-end p-6 opacity-0 transition-opacity duration-300">
+<h3 class="text-xl font-semibold text-white mb-2">Campagne digitale</h3>
+<p class="text-white/90 mb-4">Stratégie de communication digitale complète pour le lancement d'un nouveau produit.</p>
+<div class="flex gap-2">
+<span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full">Branding</span>
+<span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full">Social Media</span>
+</div>
+</div>
+</div>
+</div>
+<div class="text-center mt-12">
+<a href="#contact" class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-colors inline-block whitespace-nowrap">Discuter de votre projet</a>
+</div>
+</div>
+</section>
+<!-- Testimonials Section -->
+<section class="py-20 bg-white">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Ce que disent nos clients</h2>
+<p class="text-lg text-gray-700 max-w-3xl mx-auto">La satisfaction de nos clients est notre priorité absolue. Voici ce qu'ils pensent de notre collaboration.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Testimonial 1 -->
+<div class="bg-gray-50 p-8 rounded-lg border border-gray-100 shadow-sm">
+<div class="flex items-center mb-6">
+<div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mr-4 text-xl font-bold text-primary">AM</div>
+<div>
+<h4 class="font-semibold text-gray-900">Amadou Mbaye</h4>
+<p class="text-gray-600 text-sm">Directeur, Mbaye & Fils</p>
+</div>
+</div>
+<p class="text-gray-700 mb-6">"L'équipe de Wshop a complètement transformé notre présence en ligne. Notre nouveau site e-commerce a généré une augmentation de 40% des ventes dès le premier mois. Un travail remarquable !"</p>
+<div class="flex text-secondary">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="bg-gray-50 p-8 rounded-lg border border-gray-100 shadow-sm">
+<div class="flex items-center mb-6">
+<div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mr-4 text-xl font-bold text-primary">FD</div>
+<div>
+<h4 class="font-semibold text-gray-900">Fatou Diallo</h4>
+<p class="text-gray-600 text-sm">Fondatrice, Dakar Fresh</p>
+</div>
+</div>
+<p class="text-gray-700 mb-6">"Notre application de livraison développée par Wshop a révolutionné notre business model. L'équipe a été à l'écoute de nos besoins et a livré dans les délais. Je recommande vivement !"</p>
+<div class="flex text-secondary">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-half-fill"></i>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="bg-gray-50 p-8 rounded-lg border border-gray-100 shadow-sm">
+<div class="flex items-center mb-6">
+<div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mr-4 text-xl font-bold text-primary">OS</div>
+<div>
+<h4 class="font-semibold text-gray-900">Ousmane Sow</h4>
+<p class="text-gray-600 text-sm">CEO, SenPay</p>
+</div>
+</div>
+<p class="text-gray-700 mb-6">"Le rebranding complet de notre entreprise par Wshop a été un tournant majeur. Notre nouvelle identité visuelle reflète parfaitement nos valeurs et a renforcé notre crédibilité sur le marché."</p>
+<div class="flex text-secondary">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Section -->
+<section class="py-16 bg-primary">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+<div class="stat-item">
+<div class="text-4xl font-bold text-white mb-2">120+</div>
+<p class="text-white/80">Projets réalisés</p>
+</div>
+<div class="stat-item">
+<div class="text-4xl font-bold text-white mb-2">98%</div>
+<p class="text-white/80">Clients satisfaits</p>
+</div>
+<div class="stat-item">
+<div class="text-4xl font-bold text-white mb-2">15</div>
+<p class="text-white/80">Experts passionnés</p>
+</div>
+<div class="stat-item">
+<div class="text-4xl font-bold text-white mb-2">5</div>
+<p class="text-white/80">Années d'expérience</p>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section id="apropos" class="py-20 bg-white">
+<div class="container mx-auto px-4">
+<div class="flex flex-col lg:flex-row items-center gap-12">
+<div class="lg:w-1/2 order-2 lg:order-1">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">À propos de Wshop</h2>
+<p class="text-lg text-gray-700 mb-6">Fondée en 2020 à Dakar, Wshop est une agence digitale sénégalaise spécialisée dans la création de solutions numériques innovantes pour les PME locales.</p>
+<div class="mb-8">
+<h3 class="text-xl font-semibold text-gray-900 mb-4">Notre mission</h3>
+<p class="text-gray-700">Démocratiser l'accès aux technologies digitales pour les entreprises sénégalaises et contribuer à l'émergence d'un écosystème numérique local dynamique et compétitif.</p>
+</div>
+<div class="mb-8">
+<h3 class="text-xl font-semibold text-gray-900 mb-4">Nos valeurs</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex items-start">
+<div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-3 shrink-0">
+<i class="ri-community-line text-primary"></i>
+</div>
+<div>
+<h4 class="font-medium text-gray-900">Proximité</h4>
+<p class="text-sm text-gray-700">Une relation de confiance avec nos clients</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-3 shrink-0">
+<i class="ri-lightbulb-flash-line text-primary"></i>
+</div>
+<div>
+<h4 class="font-medium text-gray-900">Innovation</h4>
+<p class="text-sm text-gray-700">Toujours à la pointe des technologies</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-3 shrink-0">
+<i class="ri-award-line text-primary"></i>
+</div>
+<div>
+<h4 class="font-medium text-gray-900">Excellence</h4>
+<p class="text-sm text-gray-700">Un travail de qualité sans compromis</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-3 shrink-0">
+<i class="ri-global-line text-primary"></i>
+</div>
+<div>
+<h4 class="font-medium text-gray-900">Impact local</h4>
+<p class="text-sm text-gray-700">Contribuer au développement du Sénégal</p>
+</div>
+</div>
+</div>
+</div>
+<a href="#contact" class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-colors inline-block whitespace-nowrap">Rencontrer notre équipe</a>
+</div>
+<div class="lg:w-1/2 order-1 lg:order-2">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=diverse%2520team%2520of%2520young%2520African%2520tech%2520professionals%2520in%2520a%2520modern%2520office%2520in%2520Senegal%252C%2520collaborating%2520around%2520a%2520table%2520with%2520laptops%2520and%2520digital%2520devices%252C%2520bright%2520natural%2520lighting%252C%2520professional%2520business%2520attire%2520with%2520some%2520African%2520fashion%2520elements&width=600&height=500&seq=about1&orientation=landscape" alt="L'équipe Wshop" class="w-full rounded-xl shadow-xl">
+<div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-lg">
+<div class="flex items-center">
+<div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mr-4 shrink-0">
+<i class="ri-team-line ri-lg text-secondary"></i>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900">Équipe passionnée</h4>
+<p class="text-sm text-gray-700">15 experts à votre service</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-20 bg-gray-900 relative">
+<div class="absolute inset-0 opacity-20" style="background-image: url('https://readdy.ai/api/search-image?query=abstract%2520digital%2520pattern%2520with%2520blue%2520and%2520orange%2520elements%252C%2520tech-inspired%2520design%252C%2520subtle%2520African%2520motifs%252C%2520professional%2520business%2520background%252C%2520modern%2520and%2520clean&width=1920&height=500&seq=cta1&orientation=landscape'); background-size: cover; background-position: center;"></div>
+<div class="container mx-auto px-4 relative z-10">
+<div class="max-w-4xl mx-auto text-center">
+<h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Prêt à transformer votre entreprise ?</h2>
+<p class="text-lg text-white/80 mb-8">Contactez-nous dès aujourd'hui pour discuter de votre projet et découvrir comment nous pouvons vous aider à atteindre vos objectifs digitaux.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<a href="#contact" class="bg-secondary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-colors text-center whitespace-nowrap">Demander un devis gratuit</a>
+<a href="tel:+221781234567" class="bg-transparent text-white border border-white px-8 py-3 !rounded-button font-medium hover:bg-white/10 transition-colors text-center whitespace-nowrap">
+<i class="ri-phone-line mr-2"></i> +221 78 123 45 67
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section id="contact" class="py-20 bg-white">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Contactez-nous</h2>
+<p class="text-lg text-gray-700 max-w-3xl mx-auto">Vous avez un projet en tête ? Nous sommes là pour vous aider à le concrétiser. Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.</p>
+</div>
+<div class="flex flex-col lg:flex-row gap-12">
+<div class="lg:w-7/12">
+<form id="contactForm" class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label for="name" class="block text-sm font-medium text-gray-700 mb-2">Nom complet</label>
+<input type="text" id="name" name="name" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-primary" placeholder="Votre nom">
+</div>
+<div>
+<label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+<input type="email" id="email" name="email" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-primary" placeholder="votre@email.com">
+</div>
+</div>
+<div>
+<label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Téléphone</label>
+<input type="tel" id="phone" name="phone" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-primary" placeholder="+221 XX XXX XX XX">
+</div>
+<div>
+<label for="service" class="block text-sm font-medium text-gray-700 mb-2">Service souhaité</label>
+<div class="relative">
+<select id="service" name="service" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-primary appearance-none pr-8">
+<option value="" selected disabled>Sélectionnez un service</option>
+<option value="web">Développement Web</option>
+<option value="mobile">Développement Mobile</option>
+<option value="branding">Image de marque</option>
+<option value="strategy">Conseil Stratégique</option>
+<option value="other">Autre</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+<i class="ri-arrow-down-s-line text-gray-500"></i>
+</div>
+</div>
+</div>
+<div>
+<label for="message" class="block text-sm font-medium text-gray-700 mb-2">Votre projet</label>
+<textarea id="message" name="message" rows="5" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-primary" placeholder="Décrivez votre projet en quelques mots..."></textarea>
+</div>
+<div>
+<label class="custom-checkbox">
+<input type="checkbox" name="privacy">
+<span class="checkmark"></span>
+<span class="text-sm text-gray-700">J'accepte que mes données soient traitées conformément à la <a href="#" class="text-primary hover:underline">politique de confidentialité</a>.</span>
+</label>
+</div>
+<div>
+<button type="submit" class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap w-full md:w-auto">Envoyer ma demande</button>
+</div>
+</form>
+</div>
+<div class="lg:w-5/12">
+<div class="bg-gray-50 p-8 rounded-lg h-full">
+<h3 class="text-2xl font-semibold text-gray-900 mb-6">Informations de contact</h3>
+<div class="space-y-6">
+<div class="flex items-start">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 shrink-0">
+<i class="ri-map-pin-line text-primary"></i>
+</div>
+<div>
+<h4 class="font-medium text-gray-900 mb-1">Adresse</h4>
+<p class="text-gray-700">Immeuble Azur, 3ème étage<br>Route de Bambilor, Dakar, Sénégal</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 shrink-0">
+<i class="ri-phone-line text-primary"></i>
+</div>
+<div>
+<h4 class="font-medium text-gray-900 mb-1">Téléphone</h4>
+<p class="text-gray-700">+221 78 123 45 67</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 shrink-0">
+<i class="ri-mail-line text-primary"></i>
+</div>
+<div>
+<h4 class="font-medium text-gray-900 mb-1">Email</h4>
+<p class="text-gray-700">contact@wshop.sn</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 shrink-0">
+<i class="ri-time-line text-primary"></i>
+</div>
+<div>
+<h4 class="font-medium text-gray-900 mb-1">Heures d'ouverture</h4>
+<p class="text-gray-700">Lundi - Vendredi: 9h - 18h<br>Samedi: 9h - 13h</p>
+</div>
+</div>
+</div>
+<div class="mt-8">
+<h4 class="font-medium text-gray-900 mb-4">Suivez-nous</h4>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<i class="ri-facebook-fill"></i>
+</a>
+<a href="#" class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<i class="ri-linkedin-fill"></i>
+</a>
+<a href="#" class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<i class="ri-instagram-line"></i>
+</a>
+<a href="#" class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<i class="ri-whatsapp-line"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Map Section -->
+<section class="h-96 relative">
+<div class="absolute inset-0" style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png'); background-size: cover; background-position: center;"></div>
+<div class="absolute inset-0 bg-primary/10"></div>
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Wshop Sénégal</h3>
+<p class="text-gray-700 mb-4">Immeuble Azur, 3ème étage<br>Route de Bambilor, Dakar</p>
+<a href="https://maps.google.com" target="_blank" class="text-primary font-medium inline-flex items-center hover:underline">
+<i class="ri-map-pin-line mr-2"></i> Voir sur Google Maps
+</a>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white pt-16 pb-8">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+<!-- Company Info -->
+<div>
+<a href="#" class="inline-block mb-4">
+<img src="https://static.readdy.ai/image/74900c922315346346900da9821ee512/28ad02aa5a6e1564a7f63a3c5110f710.png" alt="Wshop Logo" class="h-10 brightness-0 invert">
+</a>
+<p class="text-gray-400 mb-6">Votre partenaire digital pour propulser votre entreprise vers le succès numérique au Sénégal et en Afrique de l'Ouest.</p>
+<div class="flex space-x-4">
+<a href="#" class="text-gray-400 hover:text-white transition-colors">
+<i class="ri-facebook-fill ri-lg"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-white transition-colors">
+<i class="ri-linkedin-fill ri-lg"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-white transition-colors">
+<i class="ri-instagram-line ri-lg"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-white transition-colors">
+<i class="ri-whatsapp-line ri-lg"></i>
+</a>
+</div>
+</div>
+<!-- Quick Links -->
+<div>
+<h4 class="text-lg font-semibold mb-6">Liens rapides</h4>
+<ul class="space-y-3">
+<li><a href="#accueil" class="text-gray-400 hover:text-white transition-colors">Accueil</a></li>
+<li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Nos services</a></li>
+<li><a href="#realisations" class="text-gray-400 hover:text-white transition-colors">Réalisations</a></li>
+<li><a href="#apropos" class="text-gray-400 hover:text-white transition-colors">À propos</a></li>
+<li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+</ul>
+</div>
+<!-- Services -->
+<div>
+<h4 class="text-lg font-semibold mb-6">Nos services</h4>
+<ul class="space-y-3">
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Développement Web</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Développement Mobile</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Image de marque</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Conseil Stratégique</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">E-commerce</a></li>
+</ul>
+</div>
+<!-- Contact -->
+<div>
+<h4 class="text-lg font-semibold mb-6">Contact</h4>
+<ul class="space-y-3">
+<li class="flex items-start">
+<i class="ri-map-pin-line mr-3 mt-1 text-secondary"></i>
+<span class="text-gray-400">Immeuble Azur, 3ème étage<br>Route de Bambilor, Dakar, Sénégal</span>
+</li>
+<li class="flex items-center">
+<i class="ri-phone-line mr-3 text-secondary"></i>
+<span class="text-gray-400">+221 78 123 45 67</span>
+</li>
+<li class="flex items-center">
+<i class="ri-mail-line mr-3 text-secondary"></i>
+<span class="text-gray-400">contact@wshop.sn</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="pt-8 border-t border-gray-800 text-center">
+<p class="text-gray-500 text-sm">&copy; 2025 Wshop. Tous droits réservés.</p>
+<div class="flex justify-center mt-4 space-x-6">
+<a href="#" class="text-gray-500 hover:text-gray-400 text-sm">Mentions légales</a>
+<a href="#" class="text-gray-500 hover:text-gray-400 text-sm">Politique de confidentialité</a>
+<a href="#" class="text-gray-500 hover:text-gray-400 text-sm">Conditions d'utilisation</a>
+</div>
+</div>
+</div>
+</footer>
+<script id="mobileMenuScript">
+document.addEventListener('DOMContentLoaded', function() {
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+mobileMenuBtn.addEventListener('click', function() {
+mobileMenu.classList.toggle('hidden');
+// Change icon based on menu state
+const icon = mobileMenuBtn.querySelector('i');
+if (mobileMenu.classList.contains('hidden')) {
+icon.classList.remove('ri-close-line');
+icon.classList.add('ri-menu-line');
+} else {
+icon.classList.remove('ri-menu-line');
+icon.classList.add('ri-close-line');
+}
+});
+// Close mobile menu when clicking on a link
+const mobileLinks = mobileMenu.querySelectorAll('a');
+mobileLinks.forEach(link => {
+link.addEventListener('click', function() {
+mobileMenu.classList.add('hidden');
+const icon = mobileMenuBtn.querySelector('i');
+icon.classList.remove('ri-close-line');
+icon.classList.add('ri-menu-line');
+});
+});
+});
+</script>
+<script id="projectFilterScript">
+document.addEventListener('DOMContentLoaded', function() {
+const filterBtns = document.querySelectorAll('.filter-btn');
+const projectCards = document.querySelectorAll('.project-card');
+filterBtns.forEach(btn => {
+btn.addEventListener('click', function() {
+// Remove active class from all buttons
+filterBtns.forEach(b => {
+b.classList.remove('active', 'bg-primary', 'text-white');
+b.classList.add('bg-white', 'text-gray-700');
+});
+// Add active class to clicked button
+this.classList.add('active', 'bg-primary', 'text-white');
+this.classList.remove('bg-white', 'text-gray-700');
+const filter = this.getAttribute('data-filter');
+// Filter projects
+projectCards.forEach(card => {
+if (filter === 'all' || card.getAttribute('data-category') === filter) {
+card.style.display = 'block';
+} else {
+card.style.display = 'none';
+}
+});
+});
+});
+});
+</script>
+<script id="formValidationScript">
+document.addEventListener('DOMContentLoaded', function() {
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+contactForm.addEventListener('submit', function(e) {
+e.preventDefault();
+// Simple validation
+const name = document.getElementById('name').value;
+const email = document.getElementById('email').value;
+const phone = document.getElementById('phone').value;
+const message = document.getElementById('message').value;
+const privacy = document.querySelector('input[name="privacy"]').checked;
+let isValid = true;
+let errorMessage = '';
+if (!name) {
+isValid = false;
+errorMessage += 'Veuillez saisir votre nom.\n';
+}
+if (!email) {
+isValid = false;
+errorMessage += 'Veuillez saisir votre email.\n';
+} else if (!isValidEmail(email)) {
+isValid = false;
+errorMessage += 'Veuillez saisir un email valide.\n';
+}
+if (!phone) {
+isValid = false;
+errorMessage += 'Veuillez saisir votre numéro de téléphone.\n';
+}
+if (!message) {
+isValid = false;
+errorMessage += 'Veuillez décrire votre projet.\n';
+}
+if (!privacy) {
+isValid = false;
+errorMessage += 'Veuillez accepter la politique de confidentialité.\n';
+}
+if (isValid) {
+// Simulate form submission
+alert('Merci pour votre message ! Nous vous contacterons très prochainement.');
+contactForm.reset();
+} else {
+alert(errorMessage);
+}
+});
+}
+function isValidEmail(email) {
+const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+return re.test(String(email).toLowerCase());
+}
+});
+</script>
+<script id="smoothScrollScript">
+document.addEventListener('DOMContentLoaded', function() {
+// Smooth scroll for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const targetId = this.getAttribute('href');
+if (targetId === '#') return;
+const targetElement = document.querySelector(targetId);
+if (targetElement) {
+const headerOffset = 80;
+const elementPosition = targetElement.getBoundingClientRect().top;
+const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+window.scrollTo({
+top: offsetPosition,
+behavior: 'smooth'
+});
+}
+});
+});
+});
+</script>
+</body>
+</html>
