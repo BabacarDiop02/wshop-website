@@ -12,118 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
-<style>
-:where([class^="ri-"])::before { content: "\f3c2"; }
-body {
-font-family: 'Open Sans', sans-serif;
-scroll-behavior: smooth;
-}
-h1, h2, h3, h4, h5, h6 {
-font-family: 'Poppins', sans-serif;
-}
-.logo {
-font-family: 'Pacifico', serif;
-}
-.service-card:hover {
-transform: translateY(-5px);
-box-shadow: 0 10px 25px rgba(30, 136, 229, 0.1);
-}
-.project-card:hover .project-overlay {
-opacity: 1;
-}
-.project-card:hover img {
-transform: scale(1.05);
-}
-input:focus, textarea:focus {
-outline: none;
-border-color: #1E88E5;
-box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
-}
-.custom-checkbox {
-position: relative;
-padding-left: 30px;
-cursor: pointer;
-user-select: none;
-}
-.custom-checkbox input {
-position: absolute;
-opacity: 0;
-cursor: pointer;
-}
-.checkmark {
-position: absolute;
-top: 0;
-left: 0;
-height: 20px;
-width: 20px;
-background-color: #fff;
-border: 2px solid #e2e8f0;
-border-radius: 4px;
-}
-.custom-checkbox:hover input ~ .checkmark {
-border-color: #1E88E5;
-}
-.custom-checkbox input:checked ~ .checkmark {
-background-color: #1E88E5;
-border-color: #1E88E5;
-}
-.checkmark:after {
-content: "";
-position: absolute;
-display: none;
-}
-.custom-checkbox input:checked ~ .checkmark:after {
-display: block;
-}
-.custom-checkbox .checkmark:after {
-left: 6px;
-top: 2px;
-width: 5px;
-height: 10px;
-border: solid white;
-border-width: 0 2px 2px 0;
-transform: rotate(45deg);
-}
-.custom-switch {
-position: relative;
-display: inline-block;
-width: 50px;
-height: 24px;
-}
-.custom-switch input {
-opacity: 0;
-width: 0;
-height: 0;
-}
-.slider {
-position: absolute;
-cursor: pointer;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-background-color: #e2e8f0;
-transition: .4s;
-border-radius: 34px;
-}
-.slider:before {
-position: absolute;
-content: "";
-height: 18px;
-width: 18px;
-left: 3px;
-bottom: 3px;
-background-color: white;
-transition: .4s;
-border-radius: 50%;
-}
-input:checked + .slider {
-background-color: #1E88E5;
-}
-input:checked + .slider:before {
-transform: translateX(26px);
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-white">
 <!-- Header -->
@@ -525,7 +414,7 @@ En savoir plus
 </div>
 <div>
 <h4 class="font-semibold text-gray-900">Équipe passionnée</h4>
-<p class="text-sm text-gray-700">15 experts à votre service</p>
+<p class="text-sm text-gray-700">Des experts à votre service</p>
 </div>
 </div>
 </div>
@@ -544,7 +433,7 @@ En savoir plus
 <div class="flex flex-col sm:flex-row justify-center gap-4">
 <a href="#contact" class="bg-secondary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-colors text-center whitespace-nowrap">Demander un devis gratuit</a>
 <a href="tel:+221781234567" class="bg-transparent text-white border border-white px-8 py-3 !rounded-button font-medium hover:bg-white/10 transition-colors text-center whitespace-nowrap">
-<i class="ri-phone-line mr-2"></i> +221 78 123 45 67
+<i class="ri-phone-line mr-2"></i> +221 77 694 71 50
 </a>
 </div>
 </div>
@@ -616,7 +505,7 @@ En savoir plus
 </div>
 <div>
 <h4 class="font-medium text-gray-900 mb-1">Adresse</h4>
-<p class="text-gray-700">Immeuble Azur, 3ème étage<br>Route de Bambilor, Dakar, Sénégal</p>
+<p class="text-gray-700">Keur Ball, Montagne<br>Bambilor, Dakar, Sénégal</p>
 </div>
 </div>
 <div class="flex items-start">
@@ -625,7 +514,7 @@ En savoir plus
 </div>
 <div>
 <h4 class="font-medium text-gray-900 mb-1">Téléphone</h4>
-<p class="text-gray-700">+221 78 123 45 67</p>
+<p class="text-gray-700">+221 77 694 71 50 / +221 78 898 53 54</p>
 </div>
 </div>
 <div class="flex items-start">
@@ -634,7 +523,7 @@ En savoir plus
 </div>
 <div>
 <h4 class="font-medium text-gray-900 mb-1">Email</h4>
-<p class="text-gray-700">contact@wshop.sn</p>
+<p class="text-gray-700">babacardiop1998@gmail.com</p>
 </div>
 </div>
 <div class="flex items-start">
@@ -643,7 +532,7 @@ En savoir plus
 </div>
 <div>
 <h4 class="font-medium text-gray-900 mb-1">Heures d'ouverture</h4>
-<p class="text-gray-700">Lundi - Vendredi: 9h - 18h<br>Samedi: 9h - 13h</p>
+<p class="text-gray-700">7 / 7 <b>-</b> 24 / 24</p>
 </div>
 </div>
 </div>
@@ -675,7 +564,7 @@ En savoir plus
 <div class="absolute inset-0 bg-primary/10"></div>
 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
 <h3 class="text-xl font-semibold text-gray-900 mb-2">Wshop Sénégal</h3>
-<p class="text-gray-700 mb-4">Immeuble Azur, 3ème étage<br>Route de Bambilor, Dakar</p>
+<p class="text-gray-700 mb-4">Keur Ball, Montagne<br>Bambilor, Dakar</p>
 <a href="https://maps.google.com" target="_blank" class="text-primary font-medium inline-flex items-center hover:underline">
 <i class="ri-map-pin-line mr-2"></i> Voir sur Google Maps
 </a>
@@ -734,15 +623,15 @@ En savoir plus
 <ul class="space-y-3">
 <li class="flex items-start">
 <i class="ri-map-pin-line mr-3 mt-1 text-secondary"></i>
-<span class="text-gray-400">Immeuble Azur, 3ème étage<br>Route de Bambilor, Dakar, Sénégal</span>
+<span class="text-gray-400">Keur Ball, Montagne<br>Bambilor, Dakar, Sénégal</span>
 </li>
 <li class="flex items-center">
 <i class="ri-phone-line mr-3 text-secondary"></i>
-<span class="text-gray-400">+221 78 123 45 67</span>
+<span class="text-gray-400">+221 77 694 71 50 / +221 78 898 53 54</span>
 </li>
 <li class="flex items-center">
 <i class="ri-mail-line mr-3 text-secondary"></i>
-<span class="text-gray-400">contact@wshop.sn</span>
+<span class="text-gray-400">babacardiop1998@gmail.com</span>
 </li>
 </ul>
 </div>
@@ -757,134 +646,10 @@ En savoir plus
 </div>
 </div>
 </footer>
-<script id="mobileMenuScript">
-document.addEventListener('DOMContentLoaded', function() {
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-mobileMenuBtn.addEventListener('click', function() {
-mobileMenu.classList.toggle('hidden');
-// Change icon based on menu state
-const icon = mobileMenuBtn.querySelector('i');
-if (mobileMenu.classList.contains('hidden')) {
-icon.classList.remove('ri-close-line');
-icon.classList.add('ri-menu-line');
-} else {
-icon.classList.remove('ri-menu-line');
-icon.classList.add('ri-close-line');
-}
-});
-// Close mobile menu when clicking on a link
-const mobileLinks = mobileMenu.querySelectorAll('a');
-mobileLinks.forEach(link => {
-link.addEventListener('click', function() {
-mobileMenu.classList.add('hidden');
-const icon = mobileMenuBtn.querySelector('i');
-icon.classList.remove('ri-close-line');
-icon.classList.add('ri-menu-line');
-});
-});
-});
-</script>
-<script id="projectFilterScript">
-document.addEventListener('DOMContentLoaded', function() {
-const filterBtns = document.querySelectorAll('.filter-btn');
-const projectCards = document.querySelectorAll('.project-card');
-filterBtns.forEach(btn => {
-btn.addEventListener('click', function() {
-// Remove active class from all buttons
-filterBtns.forEach(b => {
-b.classList.remove('active', 'bg-primary', 'text-white');
-b.classList.add('bg-white', 'text-gray-700');
-});
-// Add active class to clicked button
-this.classList.add('active', 'bg-primary', 'text-white');
-this.classList.remove('bg-white', 'text-gray-700');
-const filter = this.getAttribute('data-filter');
-// Filter projects
-projectCards.forEach(card => {
-if (filter === 'all' || card.getAttribute('data-category') === filter) {
-card.style.display = 'block';
-} else {
-card.style.display = 'none';
-}
-});
-});
-});
-});
-</script>
-<script id="formValidationScript">
-document.addEventListener('DOMContentLoaded', function() {
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-contactForm.addEventListener('submit', function(e) {
-e.preventDefault();
-// Simple validation
-const name = document.getElementById('name').value;
-const email = document.getElementById('email').value;
-const phone = document.getElementById('phone').value;
-const message = document.getElementById('message').value;
-const privacy = document.querySelector('input[name="privacy"]').checked;
-let isValid = true;
-let errorMessage = '';
-if (!name) {
-isValid = false;
-errorMessage += 'Veuillez saisir votre nom.\n';
-}
-if (!email) {
-isValid = false;
-errorMessage += 'Veuillez saisir votre email.\n';
-} else if (!isValidEmail(email)) {
-isValid = false;
-errorMessage += 'Veuillez saisir un email valide.\n';
-}
-if (!phone) {
-isValid = false;
-errorMessage += 'Veuillez saisir votre numéro de téléphone.\n';
-}
-if (!message) {
-isValid = false;
-errorMessage += 'Veuillez décrire votre projet.\n';
-}
-if (!privacy) {
-isValid = false;
-errorMessage += 'Veuillez accepter la politique de confidentialité.\n';
-}
-if (isValid) {
-// Simulate form submission
-alert('Merci pour votre message ! Nous vous contacterons très prochainement.');
-contactForm.reset();
-} else {
-alert(errorMessage);
-}
-});
-}
-function isValidEmail(email) {
-const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-return re.test(String(email).toLowerCase());
-}
-});
-</script>
-<script id="smoothScrollScript">
-document.addEventListener('DOMContentLoaded', function() {
-// Smooth scroll for all anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-anchor.addEventListener('click', function(e) {
-e.preventDefault();
-const targetId = this.getAttribute('href');
-if (targetId === '#') return;
-const targetElement = document.querySelector(targetId);
-if (targetElement) {
-const headerOffset = 80;
-const elementPosition = targetElement.getBoundingClientRect().top;
-const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-window.scrollTo({
-top: offsetPosition,
-behavior: 'smooth'
-});
-}
-});
-});
-});
-</script>
+
+
+
+
+  <script src="script.js"></script>
 </body>
 </html>
