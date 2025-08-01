@@ -108,3 +108,52 @@ background-color: #1E88E5;
 input:checked + .slider:before {
 transform: translateX(26px);
 }
+.card-hover {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: scale(1.02);
+}
+
+.card-hover .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-hover:hover .overlay {
+    opacity: 1;
+}
+
+.whatsapp-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background-color: #25D366;
+    border: none;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.whatsapp-btn:hover {
+    background-color: #1ebe5a;
+}
