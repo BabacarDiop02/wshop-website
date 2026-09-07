@@ -1,9 +1,9 @@
 :where([class^="ri-"])::before { content: "\f3c2"; }
 
 :root {
-  --primary: #3B82F6;
+  --primary: #1E5AF5;
   --secondary: #0F172A;
-  --accent: #F97316;
+  --accent: #FF7A00;
 }
 
 * { scroll-behavior: smooth; }
@@ -21,6 +21,22 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Pacifico', serif;
 }
 
+/* ---------- Skip link ---------- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  color: var(--secondary);
+  padding: 12px 20px;
+  border-radius: 0 0 8px 0;
+  font-weight: 600;
+}
+.skip-link:focus {
+  left: 0;
+}
+
 /* ---------- Header ---------- */
 #mainHeader {
   transition: background-color .3s ease, box-shadow .3s ease, padding .3s ease;
@@ -34,8 +50,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ---------- Hero ---------- */
 .hero-gradient {
-  background: radial-gradient(circle at 15% 20%, rgba(59,130,246,.18), transparent 45%),
-              radial-gradient(circle at 85% 10%, rgba(249,115,22,.15), transparent 40%),
+  background: radial-gradient(circle at 15% 20%, rgba(30,90,245,.16), transparent 45%),
+              radial-gradient(circle at 85% 10%, rgba(255,122,0,.14), transparent 40%),
               linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
 }
 @keyframes blob-float {
@@ -47,7 +63,7 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   border-radius: 9999px;
   filter: blur(60px);
-  opacity: .55;
+  opacity: .5;
   animation: blob-float 12s ease-in-out infinite;
   pointer-events: none;
 }
@@ -60,6 +76,53 @@ h1, h2, h3, h4, h5, h6 {
 }
 .badge-pill {
   backdrop-filter: blur(6px);
+}
+
+/* ---------- Hero device mockup (no stock/AI photos) ---------- */
+.device-mockup {
+  position: relative;
+}
+.mockup-browser {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, .25);
+  overflow: hidden;
+}
+.mockup-browser .mockup-bar {
+  background: #f1f5f9;
+  padding: 10px 14px;
+  display: flex;
+  gap: 6px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.mockup-browser .mockup-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.mockup-browser .mockup-body {
+  padding: 24px;
+}
+.mockup-line {
+  height: 10px;
+  border-radius: 5px;
+  background: #e2e8f0;
+}
+.mockup-phone {
+  position: absolute;
+  bottom: -32px;
+  right: -20px;
+  width: 120px;
+  background: var(--secondary);
+  border-radius: 22px;
+  padding: 8px;
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, .4);
+}
+.mockup-phone .mockup-screen {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 9/18;
 }
 
 /* ---------- Reveal on scroll ---------- */
@@ -85,7 +148,7 @@ h1, h2, h3, h4, h5, h6 {
 .service-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 35px rgba(15, 23, 42, .1);
-  border-color: rgba(59,130,246,.25);
+  border-color: rgba(30,90,245,.25);
 }
 .service-icon {
   transition: transform .3s ease, background .3s ease;
@@ -93,17 +156,19 @@ h1, h2, h3, h4, h5, h6 {
 .service-card:hover .service-icon {
   transform: scale(1.1) rotate(-6deg);
   background: var(--primary);
-  color: #fff;
 }
 .service-card:hover .service-icon i { color: #fff !important; }
 
-.project-card:hover .project-overlay {
-  opacity: 1;
+.project-card {
+  transition: transform .3s ease, box-shadow .3s ease;
 }
-.project-card:hover img {
-  transform: scale(1.08);
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 35px rgba(15, 23, 42, .1);
 }
-.project-card img { transition: transform .5s ease; }
+.project-thumb {
+  background: linear-gradient(135deg, rgba(30,90,245,.12), rgba(255,122,0,.12));
+}
 
 .process-step {
   position: relative;
@@ -130,17 +195,16 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.03) translateY(-8px);
 }
 
-/* ---------- Testimonials ---------- */
-.testimonial-card {
+/* ---------- Trust / testimonial placeholder ---------- */
+.trust-card {
   transition: transform .3s ease, box-shadow .3s ease;
 }
-.testimonial-card:hover {
+.trust-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 20px 30px rgba(15, 23, 42, .08);
 }
-.quote-mark {
-  font-family: Georgia, serif;
-  line-height: 1;
+.testimonial-placeholder {
+  border: 2px dashed #cbd5e1;
 }
 
 /* ---------- Stats ---------- */
@@ -171,8 +235,8 @@ details.faq-item[open] .faq-answer {
 /* ---------- Forms ---------- */
 input:focus, textarea:focus, select:focus {
   outline: none;
-  border-color: #3B82F6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, .12);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(30, 90, 245, .12);
 }
 .custom-checkbox {
   position: relative;
@@ -189,18 +253,18 @@ input:focus, textarea:focus, select:focus {
   position: absolute;
   top: 0;
   left: 0;
-  height: 20px;
-  width: 20px;
+  height: 22px;
+  width: 22px;
   background-color: #fff;
   border: 2px solid #e2e8f0;
   border-radius: 4px;
 }
 .custom-checkbox:hover input ~ .checkmark {
-  border-color: #3B82F6;
+  border-color: var(--primary);
 }
 .custom-checkbox input:checked ~ .checkmark {
-  background-color: #3B82F6;
-  border-color: #3B82F6;
+  background-color: var(--primary);
+  border-color: var(--primary);
 }
 .checkmark:after {
   content: "";
@@ -211,8 +275,8 @@ input:focus, textarea:focus, select:focus {
   display: block;
 }
 .custom-checkbox .checkmark:after {
-  left: 6px;
-  top: 2px;
+  left: 7px;
+  top: 3px;
   width: 5px;
   height: 10px;
   border: solid white;
@@ -224,60 +288,17 @@ input:focus, textarea:focus, select:focus {
   border-color: #ef4444 !important;
   box-shadow: 0 0 0 3px rgba(239, 68, 68, .12) !important;
 }
+.field-error-msg {
+  color: #ef4444;
+  font-size: .8rem;
+  margin-top: 4px;
+}
 
-/* ---------- Pricing image cards ---------- */
-.card-hover {
-  position: relative;
-  overflow: hidden;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, .12);
-  height: 320px;
-  background-size: cover;
-  background-position: center;
-  transition: transform .35s ease, box-shadow .35s ease;
+#formFeedback {
+  display: none;
 }
-.card-hover:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, .2);
-}
-.card-hover::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(15,23,42,.15) 0%, rgba(15,23,42,.9) 100%);
-}
-.card-hover .overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  color: #fff;
-  padding: 24px;
+#formFeedback.show {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-.whatsapp-btn {
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
-  z-index: 2;
-  background-color: #25D366;
-  border: none;
-  color: white;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-size: 20px;
-  cursor: pointer;
-  box-shadow: 0 6px 16px rgba(37, 211, 102, .4);
-  transition: background-color .2s ease, transform .2s ease;
-}
-.whatsapp-btn:hover {
-  background-color: #1ebe5a;
-  transform: scale(1.08);
 }
 
 /* ---------- Floating action buttons ---------- */
@@ -316,8 +337,8 @@ input:focus, textarea:focus, select:focus {
   bottom: 24px;
   right: 92px;
   z-index: 40;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background-color: var(--secondary);
   color: #fff;
@@ -343,4 +364,10 @@ input:focus, textarea:focus, select:focus {
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+
+/* ---------- Focus visibility (a11y) ---------- */
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }

@@ -18,20 +18,25 @@ document.addEventListener('DOMContentLoaded', function() {
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
   mobileMenuBtn.addEventListener('click', function() {
-    mobileMenu.classList.toggle('hidden');
+    const isHidden = mobileMenu.classList.toggle('hidden');
+    mobileMenuBtn.setAttribute('aria-expanded', String(!isHidden));
     const icon = mobileMenuBtn.querySelector('i');
-    if (mobileMenu.classList.contains('hidden')) {
+    if (isHidden) {
       icon.classList.remove('ri-close-line');
       icon.classList.add('ri-menu-line');
+      mobileMenuBtn.setAttribute('aria-label', 'Ouvrir le menu');
     } else {
       icon.classList.remove('ri-menu-line');
       icon.classList.add('ri-close-line');
+      mobileMenuBtn.setAttribute('aria-label', 'Fermer le menu');
     }
   });
   const mobileLinks = mobileMenu.querySelectorAll('a');
   mobileLinks.forEach(link => {
     link.addEventListener('click', function() {
       mobileMenu.classList.add('hidden');
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      mobileMenuBtn.setAttribute('aria-label', 'Ouvrir le menu');
       const icon = mobileMenuBtn.querySelector('i');
       icon.classList.remove('ri-close-line');
       icon.classList.add('ri-menu-line');
@@ -63,12 +68,13 @@ document.addEventListener('DOMContentLoaded', function() {
   if (!counters.length) return;
   const animateCounter = function(el) {
     const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+    const suffix = el.getAttribute('data-suffix') || '';
     const duration = 1500;
     const startTime = performance.now();
     const step = function(now) {
       const progress = Math.min((now - startTime) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(eased * target);
+      el.textContent = Math.round(eased * target) + suffix;
       if (progress < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
@@ -112,53 +118,91 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// Form validation
+// Contact form: validation + envoi via WhatsApp pré-rempli (avec secours email)
+// GitHub Pages n'a pas de backend : aucune donnée n'est stockée, tout part vers WhatsApp/email.
 document.addEventListener('DOMContentLoaded', function() {
   const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const nameInput = document.getElementById('name');
-      const emailInput = document.getElementById('email');
-      const phoneInput = document.getElementById('phone');
-      const messageInput = document.getElementById('message');
-      const privacyInput = document.querySelector('input[name="privacy"]');
-      const fields = [nameInput, emailInput, phoneInput, messageInput];
-      fields.forEach(f => f.classList.remove('field-error'));
+  if (!contactForm) return;
 
-      let isValid = true;
-      let errorMessage = '';
-      if (!nameInput.value.trim()) { errorMessage += 'Veuillez saisir votre nom.\n'; isValid = false; nameInput.classList.add('field-error'); }
-      if (!emailInput.value.trim()) { errorMessage += 'Veuillez saisir votre email.\n'; isValid = false; emailInput.classList.add('field-error'); }
-      else if (!isValidEmail(emailInput.value)) { errorMessage += 'Veuillez saisir un email valide.\n'; isValid = false; emailInput.classList.add('field-error'); }
-      if (!phoneInput.value.trim()) { errorMessage += 'Veuillez saisir votre numéro de téléphone.\n'; isValid = false; phoneInput.classList.add('field-error'); }
-      if (!messageInput.value.trim()) { errorMessage += 'Veuillez décrire votre projet.\n'; isValid = false; messageInput.classList.add('field-error'); }
-      if (!privacyInput.checked) { errorMessage += 'Veuillez accepter la politique de confidentialité.\n'; isValid = false; }
-
-      if (isValid) {
-        alert('Merci pour votre message ! Nous vous contacterons très prochainement.');
-        contactForm.reset();
-      } else {
-        alert(errorMessage);
-      }
-    });
-  }
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const phoneInput = document.getElementById('phone');
+  const serviceInput = document.getElementById('service');
+  const messageInput = document.getElementById('message');
+  const privacyInput = document.getElementById('privacy');
+  const mailFallback = document.getElementById('mailFallback');
+  const feedback = document.getElementById('formFeedback');
 
   function isValidEmail(email) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
   }
+
+  function setFieldError(input, hasError) {
+    input.classList.toggle('field-error', hasError);
+    const msg = contactForm.querySelector('[data-error-for="' + input.name + '"]');
+    if (msg) msg.classList.toggle('hidden', !hasError);
+  }
+
+  function buildWhatsappMessage() {
+    const lines = [
+      'Bonjour Wshop, je vous contacte depuis le site :',
+      'Nom : ' + nameInput.value.trim(),
+      'Email : ' + emailInput.value.trim(),
+      'Téléphone : ' + phoneInput.value.trim(),
+      'Service souhaité : ' + (serviceInput.value || 'Non précisé'),
+      'Message : ' + messageInput.value.trim()
+    ];
+    return lines.join('\n');
+  }
+
+  function updateMailFallback() {
+    const subject = encodeURIComponent('Demande de devis — ' + (serviceInput.value || 'Site Wshop'));
+    const body = encodeURIComponent(buildWhatsappMessage());
+    mailFallback.href = 'mailto:babacardiop1998@gmail.com?subject=' + subject + '&body=' + body;
+  }
+  [nameInput, emailInput, phoneInput, serviceInput, messageInput].forEach(el => {
+    el.addEventListener('input', updateMailFallback);
+    el.addEventListener('change', updateMailFallback);
+  });
+  updateMailFallback();
+
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    feedback.classList.remove('show');
+
+    let isValid = true;
+    if (!nameInput.value.trim()) { setFieldError(nameInput, true); isValid = false; } else setFieldError(nameInput, false);
+    if (!emailInput.value.trim() || !isValidEmail(emailInput.value)) { setFieldError(emailInput, true); isValid = false; } else setFieldError(emailInput, false);
+    if (!phoneInput.value.trim()) { setFieldError(phoneInput, true); isValid = false; } else setFieldError(phoneInput, false);
+    if (!messageInput.value.trim()) { setFieldError(messageInput, true); isValid = false; } else setFieldError(messageInput, false);
+    const privacyMsg = contactForm.querySelector('[data-error-for="privacy"]');
+    if (!privacyInput.checked) { if (privacyMsg) privacyMsg.classList.remove('hidden'); isValid = false; } else if (privacyMsg) privacyMsg.classList.add('hidden');
+
+    if (!isValid) {
+      const firstError = contactForm.querySelector('.field-error');
+      if (firstError) firstError.focus();
+      return;
+    }
+
+    updateMailFallback();
+    const text = encodeURIComponent(buildWhatsappMessage());
+    window.open('https://wa.me/221776947150?text=' + text, '_blank', 'noopener');
+
+    feedback.classList.add('show');
+    contactForm.reset();
+  });
 });
 
 // Smooth scroll + active nav link
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-      e.preventDefault();
       const targetId = this.getAttribute('href');
-      if (targetId === '#') return;
+      if (targetId === '#' || targetId.length < 2) return;
       const targetElement = document.querySelector(targetId);
       if (targetElement) {
+        e.preventDefault();
         const headerOffset = 80;
         const elementPosition = targetElement.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
