@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://babacardiop02.github.io/wshop-website/sitemap.xml
