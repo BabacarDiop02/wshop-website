@@ -34,7 +34,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=2">
+<link rel="stylesheet" href="style.css?v=3">
 
 <!-- Données structurées LocalBusiness -->
 <script type="application/ld+json">
@@ -115,12 +115,39 @@
 <main id="main">
 
 <!-- Hero Section -->
-<section id="accueil" class="pt-32 md:pt-24 pb-20 md:pb-0 relative min-h-screen flex items-center hero-gradient overflow-hidden">
-<div class="blob w-72 h-72 md:w-96 md:h-96 bg-primary/40 -top-10 -left-10" aria-hidden="true"></div>
-<div class="blob w-72 h-72 md:w-96 md:h-96 bg-accent/40 top-1/3 -right-10" style="animation-delay:2s;" aria-hidden="true"></div>
+<section id="accueil" class="pt-32 md:pt-24 pb-20 md:pb-0 relative min-h-screen flex items-center overflow-hidden bg-white">
+
+<!-- Arrière-plan en défilement continu (visuels produit/abstraits, aucune photo de personne) -->
+<div class="hero-scroll-bg" aria-hidden="true">
+<div class="hero-scroll-row hero-scroll-row-1">
+<img src="images/hero/hero-1.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-2.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-3.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-4.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-5.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-1.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-2.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-3.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-4.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-5.webp" alt="" width="1400" height="788">
+</div>
+<div class="hero-scroll-row hero-scroll-row-2">
+<img src="images/hero/hero-5.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-4.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-3.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-2.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-1.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-5.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-4.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-3.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-2.webp" alt="" width="1400" height="788">
+<img src="images/hero/hero-1.webp" alt="" width="1400" height="788">
+</div>
+</div>
+<div class="hero-scroll-overlay" aria-hidden="true"></div>
+
 <div class="container mx-auto px-4 relative z-10 w-full">
-<div class="flex flex-col lg:flex-row items-center gap-12">
-<div class="lg:w-1/2 max-w-2xl reveal in-view">
+<div class="max-w-2xl reveal in-view">
 <span class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
 <i class="ri-map-pin-2-fill" aria-hidden="true"></i> Agence digitale basée à Dakar
 </span>
@@ -140,34 +167,6 @@ Votre site web ou votre application mobile, conçus <span class="bg-gradient-to-
 <li class="flex items-center gap-2"><i class="ri-checkbox-circle-fill text-primary" aria-hidden="true"></i> Code livré et documenté</li>
 <li class="flex items-center gap-2"><i class="ri-checkbox-circle-fill text-primary" aria-hidden="true"></i> Paiement Wave / Orange Money</li>
 </ul>
-</div>
-<!-- Carrousel d'illustrations du héros (visuels produit/abstraits, aucune photo de personne) -->
-<div class="lg:w-1/2 relative reveal reveal-delay-2 in-view pb-10">
-<div class="hero-carousel max-w-lg mx-auto rounded-2xl overflow-hidden shadow-2xl" role="region" aria-label="Illustrations Wshop" aria-roledescription="carrousel">
-<div class="hero-slide active">
-<img src="images/hero/hero-1.webp" alt="Illustration d'un tableau de bord web et d'une application mobile aux couleurs de Wshop" width="1400" height="788">
-</div>
-<div class="hero-slide">
-<img src="images/hero/hero-2.webp" alt="Illustration d'icônes de développement web et mobile reliées entre elles" width="1400" height="788">
-</div>
-<div class="hero-slide">
-<img src="images/hero/hero-3.webp" alt="Illustration d'un écran de code et d'une application mobile en ambiance sombre" width="1400" height="788">
-</div>
-<div class="hero-slide">
-<img src="images/hero/hero-4.webp" alt="Mockup d'un ordinateur portable et d'un smartphone affichant un tableau de bord" width="1400" height="788">
-</div>
-<div class="hero-slide">
-<img src="images/hero/hero-5.webp" alt="Illustration d'un poste de travail avec ordinateur portable et smartphone" width="1400" height="788">
-</div>
-<div class="hero-carousel-dots" role="tablist" aria-label="Choisir une illustration">
-<button class="hero-dot active" data-slide="0" role="tab" aria-selected="true" aria-label="Illustration 1"></button>
-<button class="hero-dot" data-slide="1" role="tab" aria-selected="false" aria-label="Illustration 2"></button>
-<button class="hero-dot" data-slide="2" role="tab" aria-selected="false" aria-label="Illustration 3"></button>
-<button class="hero-dot" data-slide="3" role="tab" aria-selected="false" aria-label="Illustration 4"></button>
-<button class="hero-dot" data-slide="4" role="tab" aria-selected="false" aria-label="Illustration 5"></button>
-</div>
-</div>
-</div>
 </div>
 </div>
 </section>
@@ -1099,6 +1098,6 @@ Faites-vous uniquement des logos ?
 <i class="ri-arrow-up-line" aria-hidden="true"></i>
 </button>
 
-<script src="script.js?v=2"></script>
+<script src="script.js?v=3"></script>
 </body>
 </html>

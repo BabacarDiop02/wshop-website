@@ -49,10 +49,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ---------- Hero ---------- */
-.hero-gradient {
-  background: radial-gradient(circle at 15% 20%, rgba(30,90,245,.16), transparent 45%),
-              radial-gradient(circle at 85% 10%, rgba(255,122,0,.14), transparent 40%),
-              linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+.badge-pill {
+  backdrop-filter: blur(6px);
 }
 @keyframes blob-float {
   0%, 100% { transform: translate(0, 0) scale(1); }
@@ -67,66 +65,61 @@ h1, h2, h3, h4, h5, h6 {
   animation: blob-float 12s ease-in-out infinite;
   pointer-events: none;
 }
-.float-card {
-  animation: float-y 5s ease-in-out infinite;
-}
-@keyframes float-y {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-.badge-pill {
-  backdrop-filter: blur(6px);
-}
 
-/* ---------- Hero carousel (visuels produit générés, pas de photos de personnes) ---------- */
-.hero-carousel {
-  position: relative;
-  aspect-ratio: 16/9;
-  background: #fff;
-  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, .25);
-}
-.hero-slide {
+/* ---------- Hero scrolling background (visuels produit générés, pas de photos de personnes) ---------- */
+.hero-scroll-bg {
   position: absolute;
   inset: 0;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-.hero-slide.active {
-  opacity: 1;
-}
-.hero-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.hero-carousel-dots {
-  position: absolute;
-  bottom: 14px;
-  left: 0;
-  right: 0;
-  z-index: 5;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap: 8px;
+  gap: 14px;
+  transform: rotate(-3deg) scale(1.15);
+  opacity: .5;
 }
-.hero-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, .55);
-  border: 1px solid rgba(15, 23, 42, .15);
-  cursor: pointer;
-  padding: 0;
-  transition: background .25s ease, transform .25s ease;
+.hero-scroll-row {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  will-change: transform;
 }
-.hero-dot.active {
-  background: var(--accent);
-  transform: scale(1.25);
+.hero-scroll-row img {
+  height: 190px;
+  width: auto;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, .1);
+  flex-shrink: 0;
+}
+@media (min-width: 768px) {
+  .hero-scroll-row img {
+    height: 260px;
+  }
+}
+.hero-scroll-row-1 {
+  animation: hero-scroll-left 55s linear infinite;
+}
+.hero-scroll-row-2 {
+  animation: hero-scroll-right 55s linear infinite;
+}
+@keyframes hero-scroll-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes hero-scroll-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+.hero-scroll-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #fff 0%, #fff 32%, rgba(255,255,255,.88) 50%, rgba(255,255,255,.55) 68%, rgba(255,255,255,.25) 100%),
+              linear-gradient(0deg, #fff 0%, rgba(255,255,255,0) 18%, rgba(255,255,255,0) 82%, #fff 100%);
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-slide {
-    transition: none;
+  .hero-scroll-row-1,
+  .hero-scroll-row-2 {
+    animation-play-state: paused;
   }
 }
 

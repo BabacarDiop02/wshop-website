@@ -44,56 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// Hero carousel (défilement automatique en fondu)
-document.addEventListener('DOMContentLoaded', function() {
-  const carousel = document.querySelector('.hero-carousel');
-  if (!carousel) return;
-  const slides = carousel.querySelectorAll('.hero-slide');
-  const dots = carousel.querySelectorAll('.hero-dot');
-  if (!slides.length) return;
-
-  let current = 0;
-  let timer = null;
-  const intervalMs = 4500;
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function goTo(index) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    dots[current].setAttribute('aria-selected', 'false');
-    current = (index + slides.length) % slides.length;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
-    dots[current].setAttribute('aria-selected', 'true');
-  }
-
-  function next() { goTo(current + 1); }
-
-  function start() {
-    if (reduceMotion) return;
-    stop();
-    timer = setInterval(next, intervalMs);
-  }
-  function stop() {
-    if (timer) clearInterval(timer);
-    timer = null;
-  }
-
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', function() {
-      goTo(i);
-      start();
-    });
-  });
-
-  carousel.addEventListener('mouseenter', stop);
-  carousel.addEventListener('mouseleave', start);
-  carousel.addEventListener('focusin', stop);
-  carousel.addEventListener('focusout', start);
-
-  start();
-});
-
 // Reveal on scroll
 document.addEventListener('DOMContentLoaded', function() {
   const revealEls = document.querySelectorAll('.reveal');
