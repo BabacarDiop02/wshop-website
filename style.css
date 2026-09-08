@@ -17,11 +17,8 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Poppins', sans-serif;
 }
 
-.wordmark {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 800;
-  font-style: italic;
-  letter-spacing: 0.5px;
+.logo {
+  font-family: 'Pacifico', serif;
 }
 .brand-mark svg {
   display: block;
