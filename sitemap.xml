@@ -5,4 +5,44 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://babacardiop02.github.io/wshop-website/blog.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://babacardiop02.github.io/wshop-website/article.html?slug=site-web-pme-senegal</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://babacardiop02.github.io/wshop-website/article.html?slug=choisir-agence-web-dakar</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://babacardiop02.github.io/wshop-website/article.html?slug=application-mobile-ou-site-web</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://babacardiop02.github.io/wshop-website/glossaire.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://babacardiop02.github.io/wshop-website/projet.html?slug=xam-xam</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://babacardiop02.github.io/wshop-website/projet.html?slug=fintrack</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://babacardiop02.github.io/wshop-website/projet.html?slug=pharmaconnect</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>

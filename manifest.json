@@ -1,0 +1,14 @@
+{
+  "name": "Wshop — Agence digitale à Dakar",
+  "short_name": "Wshop",
+  "description": "Sites web, applications mobiles et identité visuelle pour PME sénégalaises.",
+  "start_url": "/wshop-website/index.html",
+  "scope": "/wshop-website/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1E5AF5",
+  "lang": "fr",
+  "icons": [
+    { "src": "favicon.ico", "sizes": "48x48", "type": "image/x-icon" }
+  ]
+}

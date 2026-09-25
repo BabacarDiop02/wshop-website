@@ -27,13 +27,28 @@
 <meta name="google-site-verification" content="s4AaYM4dHtjpSlNzGjHsBhZMej_nQxTVI9Mym1S4Ruo" />
 
 <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-<script>tailwind.config={theme:{extend:{colors:{primary:'#1E5AF5',secondary:'#0F172A',accent:'#FF7A00'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#1E5AF5',secondary:'#0F172A',accent:'#FF7A00'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<!-- Applique le mode sombre mémorisé avant le premier rendu, pour éviter un flash (#26) -->
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('wshop-theme');
+      var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      if (theme === 'dark') document.documentElement.classList.add('dark');
+      document.documentElement.classList.add('theme-init');
+    } catch (e) {}
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="css/dark-mode.css?v=1">
+<link rel="stylesheet" href="css/portfolio.css?v=1">
+<link rel="stylesheet" href="css/components.css?v=1">
+<link rel="manifest" href="manifest.json">
 
 <!-- Données structurées LocalBusiness -->
 <script type="application/ld+json">
@@ -70,6 +85,38 @@
   ]
 }
 </script>
+
+<!-- Données structurées Service (#25) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    { "@type": "Service", "position": 1, "name": "Développement Web", "provider": { "@type": "ProfessionalService", "name": "Wshop" }, "areaServed": "Sénégal", "description": "Sites vitrines, e-commerce et applications web sur mesure." },
+    { "@type": "Service", "position": 2, "name": "Développement Mobile", "provider": { "@type": "ProfessionalService", "name": "Wshop" }, "areaServed": "Sénégal", "description": "Applications Android et iOS avec Flutter, publication sur les stores." },
+    { "@type": "Service", "position": 3, "name": "Image de marque", "provider": { "@type": "ProfessionalService", "name": "Wshop" }, "areaServed": "Sénégal", "description": "Logo, charte graphique et identité visuelle." },
+    { "@type": "Service", "position": 4, "name": "Conseil & présence en ligne", "provider": { "@type": "ProfessionalService", "name": "Wshop" }, "areaServed": "Sénégal", "description": "Stratégie digitale, référencement local et réseaux sociaux." }
+  ]
+}
+</script>
+
+<!-- Données structurées FAQPage (#25) : reprend les questions de la section FAQ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Combien de temps pour livrer mon site ?", "acceptedAnswer": { "@type": "Answer", "text": "De 1 à 3 semaines selon le pack et vos contenus." } },
+    { "@type": "Question", "name": "Comment se passe le paiement ?", "acceptedAnswer": { "@type": "Answer", "text": "Acompte de 40 % au démarrage, solde à la livraison. Wave et Orange Money acceptés." } },
+    { "@type": "Question", "name": "Le site m'appartient-il vraiment ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, entièrement. Vous en êtes propriétaire, code compris." } },
+    { "@type": "Question", "name": "Gérez-vous l'hébergement et le nom de domaine ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, je vous accompagne pour le choix et la mise en place." } },
+    { "@type": "Question", "name": "Puis-je modifier mon site moi-même ensuite ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, une formation à la prise en main est incluse." } },
+    { "@type": "Question", "name": "Travaillez-vous à distance / hors de Dakar ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, avec des clients partout au Sénégal et à l'international." } },
+    { "@type": "Question", "name": "Que se passe-t-il après la livraison ?", "acceptedAnswer": { "@type": "Answer", "text": "1 mois de support inclus, puis maintenance en option." } },
+    { "@type": "Question", "name": "Faites-vous uniquement des logos ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, l'identité visuelle peut être commandée seule." } }
+  ]
+}
+</script>
 </head>
 <body class="bg-white">
 <a href="#main" class="skip-link">Aller au contenu principal</a>
@@ -81,14 +128,21 @@
 <img src="images/logo-navy.webp" alt="Wshop" style="height:36px; width:auto;">
 </a>
 <!-- Desktop Menu -->
-<nav class="hidden md:flex items-center space-x-7" aria-label="Navigation principale">
-<a href="#accueil" class="nav-link text-gray-800 hover:text-primary font-medium transition-colors">Accueil</a>
-<a href="#services" class="nav-link text-gray-800 hover:text-primary font-medium transition-colors">Services</a>
-<a href="#tarifs" class="nav-link text-gray-800 hover:text-primary font-medium transition-colors">Tarifs</a>
-<a href="#realisations" class="nav-link text-gray-800 hover:text-primary font-medium transition-colors">Réalisations</a>
-<a href="#apropos" class="nav-link text-gray-800 hover:text-primary font-medium transition-colors">À propos</a>
-<a href="#faq" class="nav-link text-gray-800 hover:text-primary font-medium transition-colors">FAQ</a>
-<a href="#contact" class="bg-secondary text-white px-5 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap">Demander un devis</a>
+<nav class="hidden md:flex items-center space-x-6" aria-label="Navigation principale">
+<a href="#accueil" class="nav-link text-gray-800 hover:text-primary font-medium transition-colors" data-i18n="nav.home">Accueil</a>
+<a href="#services" class="nav-link text-gray-800 hover:text-primary font-medium transition-colors" data-i18n="nav.services">Services</a>
+<a href="#tarifs" class="nav-link text-gray-800 hover:text-primary font-medium transition-colors" data-i18n="nav.pricing">Tarifs</a>
+<a href="#realisations" class="nav-link text-gray-800 hover:text-primary font-medium transition-colors" data-i18n="nav.projects">Réalisations</a>
+<a href="blog.html" class="nav-link text-gray-800 hover:text-primary font-medium transition-colors" data-i18n="nav.blog">Blog</a>
+<a href="#apropos" class="nav-link text-gray-800 hover:text-primary font-medium transition-colors" data-i18n="nav.about">À propos</a>
+<a href="#faq" class="nav-link text-gray-800 hover:text-primary font-medium transition-colors" data-i18n="nav.faq">FAQ</a>
+<button id="themeToggle" type="button" aria-label="Basculer le mode sombre">
+<i class="ri-moon-line" aria-hidden="true"></i><i class="ri-sun-line" aria-hidden="true"></i>
+</button>
+<div id="langToggle" role="group" aria-label="Choix de la langue">
+<button data-lang="fr" type="button">FR</button><button data-lang="en" type="button">EN</button>
+</div>
+<a href="#contact" class="bg-secondary text-white px-5 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap" data-i18n="nav.cta">Demander un devis</a>
 </nav>
 <!-- Mobile Menu Button -->
 <button class="md:hidden w-11 h-11 flex items-center justify-center cursor-pointer" id="mobileMenuBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
@@ -102,9 +156,11 @@
 <a href="#services" class="text-gray-800 hover:text-primary font-medium py-3 transition-colors">Services</a>
 <a href="#tarifs" class="text-gray-800 hover:text-primary font-medium py-3 transition-colors">Tarifs</a>
 <a href="#realisations" class="text-gray-800 hover:text-primary font-medium py-3 transition-colors">Réalisations</a>
+<a href="blog.html" class="text-gray-800 hover:text-primary font-medium py-3 transition-colors">Blog</a>
 <a href="#apropos" class="text-gray-800 hover:text-primary font-medium py-3 transition-colors">À propos</a>
 <a href="#faq" class="text-gray-800 hover:text-primary font-medium py-3 transition-colors">FAQ</a>
 <a href="#contact" class="text-gray-800 hover:text-primary font-medium py-3 transition-colors">Contact</a>
+<a href="suivi-projet.html" class="text-gray-800 hover:text-primary font-medium py-3 transition-colors"><i class="ri-flashlight-line mr-1" aria-hidden="true"></i> Suivi de projet</a>
 <a href="#contact" class="bg-secondary text-white px-5 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-colors text-center whitespace-nowrap mt-2">Demander un devis</a>
 </div>
 </div>
@@ -146,24 +202,25 @@
 
 <div class="container mx-auto px-4 relative z-10 w-full">
 <div class="max-w-2xl reveal in-view">
-<span class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
-<i class="ri-map-pin-2-fill" aria-hidden="true"></i> Agence digitale basée à Dakar
+<span class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
+<i class="ri-map-pin-2-fill" aria-hidden="true"></i> <span data-i18n="hero.badge">Agence digitale basée à Dakar</span>
 </span>
+<div class="availability-badge mb-6" data-availability-badge></div>
 <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">
 Votre site web ou votre application mobile, conçus <span class="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">sur mesure</span> à Dakar
 </h1>
-<p class="text-lg md:text-xl text-gray-700 mb-8">Wshop accompagne les PME, startups et professionnels sénégalais dans leur passage au digital : sites vitrines, e-commerce, applications mobiles et identité visuelle. Développeur full-stack actif depuis 2020, prix clairs, livraison rapide.</p>
+<p class="text-lg md:text-xl text-gray-700 mb-8" data-i18n="hero.subtitle">Wshop accompagne les PME, startups et professionnels sénégalais dans leur passage au digital : sites vitrines, e-commerce, applications mobiles et identité visuelle. Développeur full-stack actif depuis 2020, prix clairs, livraison rapide.</p>
 <div class="flex flex-col sm:flex-row gap-4 mb-8">
-<a href="#contact" class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all hover:shadow-lg hover:shadow-primary/30 text-center whitespace-nowrap">Demander un devis gratuit</a>
+<a href="#contact" class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all hover:shadow-lg hover:shadow-primary/30 text-center whitespace-nowrap" data-i18n="hero.cta1">Demander un devis gratuit</a>
 <a href="#realisations" class="bg-white text-primary border border-primary px-8 py-3 !rounded-button font-medium hover:bg-primary/5 transition-colors text-center whitespace-nowrap">
-<i class="ri-code-box-line mr-1" aria-hidden="true"></i> Voir nos réalisations
+<i class="ri-code-box-line mr-1" aria-hidden="true"></i> <span data-i18n="hero.cta2">Voir nos réalisations</span>
 </a>
 </div>
 <ul class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600">
-<li class="flex items-center gap-2"><i class="ri-checkbox-circle-fill text-primary" aria-hidden="true"></i> Devis gratuit</li>
-<li class="flex items-center gap-2"><i class="ri-checkbox-circle-fill text-primary" aria-hidden="true"></i> Acompte 40 %</li>
-<li class="flex items-center gap-2"><i class="ri-checkbox-circle-fill text-primary" aria-hidden="true"></i> Code livré et documenté</li>
-<li class="flex items-center gap-2"><i class="ri-checkbox-circle-fill text-primary" aria-hidden="true"></i> Paiement Wave / Orange Money</li>
+<li class="flex items-center gap-2"><i class="ri-checkbox-circle-fill text-primary" aria-hidden="true"></i> <span data-i18n="hero.check1">Devis gratuit</span></li>
+<li class="flex items-center gap-2"><i class="ri-checkbox-circle-fill text-primary" aria-hidden="true"></i> <span data-i18n="hero.check2">Acompte 40 %</span></li>
+<li class="flex items-center gap-2"><i class="ri-checkbox-circle-fill text-primary" aria-hidden="true"></i> <span data-i18n="hero.check3">Code livré et documenté</span></li>
+<li class="flex items-center gap-2"><i class="ri-checkbox-circle-fill text-primary" aria-hidden="true"></i> <span data-i18n="hero.check4">Paiement Wave / Orange Money</span></li>
 </ul>
 </div>
 </div>
@@ -283,9 +340,12 @@ Demander un devis
 <section id="tarifs" class="py-20 bg-white">
 <div class="container mx-auto px-4">
 <div class="text-center mb-16 reveal">
-<span class="text-primary font-semibold uppercase tracking-wide text-sm">Nos offres</span>
-<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">Des tarifs clairs et adaptés</h2>
-<p class="text-lg text-gray-700 max-w-3xl mx-auto">Des prix affichés, sans devis flou. Tous nos packs sont personnalisables selon vos besoins.</p>
+<span class="text-primary font-semibold uppercase tracking-wide text-sm" data-i18n="pricing.eyebrow">Nos offres</span>
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4" data-i18n="pricing.title">Des tarifs clairs et adaptés</h2>
+<p class="text-lg text-gray-700 max-w-3xl mx-auto mb-6" data-i18n="pricing.subtitle">Des prix affichés, sans devis flou. Tous nos packs sont personnalisables selon vos besoins.</p>
+<button type="button" id="openQuoteCalc" data-open-quote-calc class="bg-white border-2 border-primary text-primary px-6 py-3 !rounded-button font-medium inline-flex items-center gap-2 hover:bg-primary/5 transition-colors">
+<i class="ri-calculator-line" aria-hidden="true"></i> <span data-i18n="calc.cta">Estimer mon projet</span>
+</button>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
 <!-- Pack Réservation Express -->
@@ -361,205 +421,35 @@ Demander un devis
 <section id="realisations" class="py-20 bg-gray-50">
 <div class="container mx-auto px-4">
 <div class="text-center mb-16 reveal">
-<span class="text-primary font-semibold uppercase tracking-wide text-sm">Portfolio</span>
-<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">Nos Réalisations</h2>
-<p class="text-lg text-gray-700 max-w-3xl mx-auto">Un aperçu de projets réels développés par Wshop — applications mobiles, plateformes web et outils métiers.</p>
+<span class="text-primary font-semibold uppercase tracking-wide text-sm" data-i18n="projects.eyebrow">Portfolio</span>
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4" data-i18n="projects.title">Nos Réalisations</h2>
+<p class="text-lg text-gray-700 max-w-3xl mx-auto" data-i18n="projects.subtitle">Un aperçu de projets réels développés par Wshop — applications mobiles, plateformes web et outils métiers.</p>
 </div>
-<!-- Project Filters -->
+<!-- Barre d'outils : recherche + tri (#4, #5) -->
+<div class="portfolio-toolbar mb-8 reveal">
+<div class="portfolio-search">
+<i class="ri-search-line" aria-hidden="true"></i>
+<input type="search" id="projectsSearch" data-i18n-placeholder="projects.search.placeholder" placeholder="Rechercher un projet, une techno...">
+</div>
+<select id="projectsSort" class="portfolio-sort">
+<option value="recent" data-i18n="projects.sort.recent">Plus récents</option>
+<option value="alpha" data-i18n="projects.sort.alpha">Ordre alphabétique</option>
+</select>
+</div>
+<!-- Project Filters (#3 : combinés à la recherche et au tri ci-dessus) -->
 <div class="flex flex-wrap justify-center mb-12 gap-2 reveal">
-<button class="filter-btn active bg-primary text-white px-6 py-2 !rounded-button font-medium transition-colors whitespace-nowrap min-h-[44px]" data-filter="all">Tous</button>
-<button class="filter-btn bg-white text-gray-700 px-6 py-2 !rounded-button font-medium hover:bg-gray-100 transition-colors whitespace-nowrap border border-gray-200 min-h-[44px]" data-filter="web">Web</button>
-<button class="filter-btn bg-white text-gray-700 px-6 py-2 !rounded-button font-medium hover:bg-gray-100 transition-colors whitespace-nowrap border border-gray-200 min-h-[44px]" data-filter="mobile">Mobile</button>
-<button class="filter-btn bg-white text-gray-700 px-6 py-2 !rounded-button font-medium hover:bg-gray-100 transition-colors whitespace-nowrap border border-gray-200 min-h-[44px]" data-filter="backend">Backend</button>
+<button class="filter-btn active bg-primary text-white px-6 py-2 !rounded-button font-medium transition-colors whitespace-nowrap min-h-[44px]" data-filter="all"><span data-i18n="projects.filter.all">Tous</span></button>
+<button class="filter-btn bg-white text-gray-700 px-6 py-2 !rounded-button font-medium hover:bg-gray-100 transition-colors whitespace-nowrap border border-gray-200 min-h-[44px]" data-filter="web"><span data-i18n="projects.filter.web">Web</span></button>
+<button class="filter-btn bg-white text-gray-700 px-6 py-2 !rounded-button font-medium hover:bg-gray-100 transition-colors whitespace-nowrap border border-gray-200 min-h-[44px]" data-filter="mobile"><span data-i18n="projects.filter.mobile">Mobile</span></button>
+<button class="filter-btn bg-white text-gray-700 px-6 py-2 !rounded-button font-medium hover:bg-gray-100 transition-colors whitespace-nowrap border border-gray-200 min-h-[44px]" data-filter="backend"><span data-i18n="projects.filter.backend">Backend</span></button>
 </div>
-<!-- Projects Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-<!-- FinTrack -->
-<div class="project-card reveal bg-white rounded-lg shadow-md overflow-hidden" data-category="mobile">
-<!-- remplacer par capture réelle de l'application -->
-<div class="project-thumb h-44 flex items-center justify-center">
-<i class="ri-wallet-3-line text-5xl text-primary/50" aria-hidden="true"></i>
-</div>
-<div class="p-6">
-<span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Finance · Mobile</span>
-<h3 class="text-lg font-semibold text-gray-900 mb-2">FinTrack</h3>
-<p class="text-gray-600 text-sm mb-4">Application de gestion de finances personnelles : suivi des dépenses, budgets et objectifs d'épargne. Build APK Android livré.</p>
-<div class="flex flex-wrap gap-2 mb-4">
-<span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Flutter</span>
-<span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Dart</span>
-<span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Supabase</span>
-</div>
-<!-- TODO(Babacar) : remplacer par le lien exact du dépôt -->
-<a href="https://github.com/BabacarDiop02" target="_blank" rel="noopener" class="text-primary font-medium inline-flex items-center hover:underline text-sm">
-<i class="ri-github-fill mr-1" aria-hidden="true"></i> Voir le code
-</a>
-</div>
-</div>
-
-<!-- PharmaConnect -->
-<div class="project-card reveal reveal-delay-1 bg-white rounded-lg shadow-md overflow-hidden" data-category="mobile">
-<!-- remplacer par capture réelle de l'application -->
-<div class="project-thumb h-44 flex items-center justify-center">
-<i class="ri-capsule-line text-5xl text-primary/50" aria-hidden="true"></i>
-</div>
-<div class="p-6">
-<span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Santé · Mobile</span>
-<h3 class="text-lg font-semibold text-gray-900 mb-2">PharmaConnect</h3>
-<p class="text-gray-600 text-sm mb-4">Localisation des pharmacies et numérisation d'ordonnances à Dakar : trouver une pharmacie proche et scanner ses prescriptions.</p>
-<div class="flex flex-wrap gap-2 mb-4">
-<span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Flutter</span>
-<span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Dart</span>
-</div>
-<!-- TODO(Babacar) : remplacer par le lien exact du dépôt -->
-<a href="https://github.com/BabacarDiop02" target="_blank" rel="noopener" class="text-primary font-medium inline-flex items-center hover:underline text-sm">
-<i class="ri-github-fill mr-1" aria-hidden="true"></i> Voir le code
-</a>
-</div>
-</div>
-
-<!-- Xam-Xam -->
-<div class="project-card reveal reveal-delay-2 bg-white rounded-lg shadow-md overflow-hidden" data-category="mobile">
-<div class="h-44 overflow-hidden">
-<img src="images/projects/xam-xam.webp" alt="Application mobile Xam-Xam ouverte sur un smartphone, écran d'accueil du jeu avec la progression du joueur" class="w-full h-full object-cover" loading="lazy" width="900" height="506">
-</div>
-<div class="p-6">
-<span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Éducation · Jeu mobile</span>
-<h3 class="text-lg font-semibold text-gray-900 mb-2">Xam-Xam</h3>
-<p class="text-gray-600 text-sm mb-4">Jeu de culture générale et de réflexion (« Xam-Xam » signifie « le savoir » en wolof). 100 % hors-ligne, progression par niveaux, étoiles et XP, plus de 25 types de questions.</p>
-<div class="flex flex-wrap gap-2 mb-4">
-<span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Flutter</span>
-<span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">SQLite</span>
-</div>
-<!-- TODO(Babacar) : remplacer par le lien exact du dépôt -->
-<a href="https://github.com/BabacarDiop02" target="_blank" rel="noopener" class="text-primary font-medium inline-flex items-center hover:underline text-sm">
-<i class="ri-github-fill mr-1" aria-hidden="true"></i> Voir le code
-</a>
-</div>
-</div>
-
-<!-- Task Flow -->
-<div class="project-card reveal bg-white rounded-lg shadow-md overflow-hidden" data-category="web">
-<!-- remplacer par capture réelle de l'application -->
-<div class="project-thumb h-44 flex items-center justify-center">
-<i class="ri-task-line text-5xl text-primary/50" aria-hidden="true"></i>
-</div>
-<div class="p-6">
-<span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Web · Gestion</span>
-<h3 class="text-lg font-semibold text-gray-900 mb-2">Task Flow</h3>
-<p class="text-gray-600 text-sm mb-4">Application de gestion de tâches et de flux de travail, avec une API robuste.</p>
-<div class="flex flex-wrap gap-2 mb-4">
-<span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Spring Boot</span>
-<span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Java</span>
-</div>
-<!-- TODO(Babacar) : remplacer par le lien exact du dépôt -->
-<a href="https://github.com/BabacarDiop02" target="_blank" rel="noopener" class="text-primary font-medium inline-flex items-center hover:underline text-sm">
-<i class="ri-github-fill mr-1" aria-hidden="true"></i> Voir le code
-</a>
-</div>
-</div>
-
-<!-- Stock Manager -->
-<div class="project-card reveal reveal-delay-1 bg-white rounded-lg shadow-md overflow-hidden" data-category="web">
-<!-- remplacer par capture réelle de l'application -->
-<div class="project-thumb h-44 flex items-center justify-center">
-<i class="ri-archive-line text-5xl text-primary/50" aria-hidden="true"></i>
-</div>
-<div class="p-6">
-<span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Web · Gestion</span>
-<h3 class="text-lg font-semibold text-gray-900 mb-2">Stock Manager</h3>
-<p class="text-gray-600 text-sm mb-4">Système de gestion de stock et d'inventaire pour commerces et entreprises.</p>
-<div class="flex flex-wrap gap-2 mb-4">
-<span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Web</span>
-</div>
-<!-- TODO(Babacar) : remplacer par le lien exact du dépôt -->
-<a href="https://github.com/BabacarDiop02" target="_blank" rel="noopener" class="text-primary font-medium inline-flex items-center hover:underline text-sm">
-<i class="ri-github-fill mr-1" aria-hidden="true"></i> Voir le code
-</a>
-</div>
-</div>
-
-<!-- Gestion Courrier -->
-<div class="project-card reveal reveal-delay-2 bg-white rounded-lg shadow-md overflow-hidden" data-category="web">
-<!-- remplacer par capture réelle de l'application -->
-<div class="project-thumb h-44 flex items-center justify-center">
-<i class="ri-mail-send-line text-5xl text-primary/50" aria-hidden="true"></i>
-</div>
-<div class="p-6">
-<span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Web · Bureautique</span>
-<h3 class="text-lg font-semibold text-gray-900 mb-2">Gestion Courrier</h3>
-<p class="text-gray-600 text-sm mb-4">Plateforme de gestion et de suivi du courrier entrant/sortant.</p>
-<div class="flex flex-wrap gap-2 mb-4">
-<span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Web</span>
-</div>
-<!-- TODO(Babacar) : remplacer par le lien exact du dépôt -->
-<a href="https://github.com/BabacarDiop02" target="_blank" rel="noopener" class="text-primary font-medium inline-flex items-center hover:underline text-sm">
-<i class="ri-github-fill mr-1" aria-hidden="true"></i> Voir le code
-</a>
-</div>
-</div>
-
-<!-- DSMS -->
-<div class="project-card reveal bg-white rounded-lg shadow-md overflow-hidden" data-category="web">
-<!-- remplacer par capture réelle de l'application -->
-<div class="project-thumb h-44 flex items-center justify-center">
-<i class="ri-database-2-line text-5xl text-primary/50" aria-hidden="true"></i>
-</div>
-<div class="p-6">
-<span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Web · Plateforme</span>
-<h3 class="text-lg font-semibold text-gray-900 mb-2">DSMS</h3>
-<!-- TODO(Babacar) : préciser le domaine exact de ce projet -->
-<p class="text-gray-600 text-sm mb-4">Système de gestion (domaine à préciser).</p>
-<div class="flex flex-wrap gap-2 mb-4">
-<span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Web</span>
-</div>
-<!-- TODO(Babacar) : remplacer par le lien exact du dépôt -->
-<a href="https://github.com/BabacarDiop02" target="_blank" rel="noopener" class="text-primary font-medium inline-flex items-center hover:underline text-sm">
-<i class="ri-github-fill mr-1" aria-hidden="true"></i> Voir le code
-</a>
-</div>
-</div>
-
-<!-- P2P Node -->
-<div class="project-card reveal reveal-delay-1 bg-white rounded-lg shadow-md overflow-hidden" data-category="backend">
-<!-- remplacer par capture réelle / diagramme du projet -->
-<div class="project-thumb h-44 flex items-center justify-center">
-<i class="ri-share-forward-line text-5xl text-primary/50" aria-hidden="true"></i>
-</div>
-<div class="p-6">
-<span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Backend · Réseau</span>
-<h3 class="text-lg font-semibold text-gray-900 mb-2">P2P Node</h3>
-<p class="text-gray-600 text-sm mb-4">Nœud pair-à-pair et architecture distribuée.</p>
-<div class="flex flex-wrap gap-2 mb-4">
-<span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Backend</span>
-</div>
-<!-- TODO(Babacar) : remplacer par le lien exact du dépôt -->
-<a href="https://gitlab.com/babacardiop1998" target="_blank" rel="noopener" class="text-primary font-medium inline-flex items-center hover:underline text-sm">
-<i class="ri-git-branch-line mr-1" aria-hidden="true"></i> Voir le code
-</a>
-</div>
-</div>
-
-<!-- Basketball Plateforme -->
-<div class="project-card reveal reveal-delay-2 bg-white rounded-lg shadow-md overflow-hidden" data-category="web">
-<!-- remplacer par capture réelle de l'application -->
-<div class="project-thumb h-44 flex items-center justify-center">
-<i class="ri-basketball-line text-5xl text-primary/50" aria-hidden="true"></i>
-</div>
-<div class="p-6">
-<span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">Web</span>
-<h3 class="text-lg font-semibold text-gray-900 mb-2">Basketball Plateforme</h3>
-<p class="text-gray-600 text-sm mb-4">Plateforme dédiée au basketball (gestion et suivi).</p>
-<div class="flex flex-wrap gap-2 mb-4">
-<span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Web</span>
-</div>
-<!-- TODO(Babacar) : remplacer par le lien exact du dépôt -->
-<a href="https://github.com/BabacarDiop02" target="_blank" rel="noopener" class="text-primary font-medium inline-flex items-center hover:underline text-sm">
-<i class="ri-github-fill mr-1" aria-hidden="true"></i> Voir le code
-</a>
-</div>
-</div>
-
+<!-- Projects Grid : rendu dynamiquement par js/modules/portfolio.js à partir de js/data/projects.js (#1, #8, #9, #28) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid" aria-live="polite"></div>
+<p class="portfolio-empty" id="projectsEmpty" data-i18n="projects.empty">Aucun projet ne correspond à votre recherche.</p>
+<div class="text-center mt-10">
+<button type="button" id="loadMoreProjects" class="hidden bg-white border border-gray-300 text-gray-700 px-6 py-3 !rounded-button font-medium hover:bg-gray-100 transition-colors inline-flex items-center gap-2">
+<span data-i18n="projects.loadMore">Charger plus de projets</span> <i class="ri-arrow-down-line" aria-hidden="true"></i>
+</button>
 </div>
 
 <div class="text-center mt-14 reveal">
@@ -583,37 +473,27 @@ Demander un devis
 <section id="process" class="py-20 bg-white">
 <div class="container mx-auto px-4">
 <div class="text-center mb-16 reveal">
-<span class="text-primary font-semibold uppercase tracking-wide text-sm">Notre méthode</span>
-<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">Comment nous travaillons</h2>
-<p class="text-lg text-gray-700 max-w-3xl mx-auto">Un processus simple et transparent, de l'idée à la mise en ligne.</p>
+<span class="text-primary font-semibold uppercase tracking-wide text-sm" data-i18n="process.eyebrow">Notre méthode</span>
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4" data-i18n="process.title">Comment nous travaillons</h2>
+<p class="text-lg text-gray-700 max-w-3xl mx-auto" data-i18n="process.subtitle">Un processus simple et transparent, de l'idée à la mise en ligne.</p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-5 gap-8 relative">
 <div class="hidden md:block absolute top-8 left-0 right-0 h-0.5 bg-gray-200" style="margin: 0 10%;" aria-hidden="true"></div>
 <div class="process-step reveal text-center relative">
 <div class="step-num w-16 h-16 mx-auto rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold shadow-lg shadow-primary/30 relative z-10">1</div>
-<h3 class="text-base font-semibold text-gray-900 mt-6 mb-2">Échange & devis gratuit</h3>
-<p class="text-gray-600 text-sm">On comprend votre besoin et votre budget, sans engagement.</p>
-</div>
+<div class="step-toggle"><h3 class="text-base font-semibold text-gray-900 mt-6 mb-2">Échange & devis gratuit</h3><p class="text-gray-600 text-sm">On comprend votre besoin et votre budget, sans engagement.</p><span class="text-primary text-xs font-medium inline-flex items-center gap-1 mt-2 cursor-pointer">En savoir plus <i class="ri-arrow-down-s-line" aria-hidden="true"></i></span></div><p class="step-detail text-gray-500 text-xs text-left px-2">Un appel ou un échange WhatsApp de 15 à 30 minutes pour cerner votre besoin réel, votre budget et vos délais. Le devis qui suit est gratuit et sans engagement.</p></div>
 <div class="process-step reveal reveal-delay-1 text-center relative">
 <div class="step-num w-16 h-16 mx-auto rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold shadow-lg shadow-primary/30 relative z-10">2</div>
-<h3 class="text-base font-semibold text-gray-900 mt-6 mb-2">Proposition & acompte 40 %</h3>
-<p class="text-gray-600 text-sm">Un devis clair, un délai précis, on démarre.</p>
-</div>
+<div class="step-toggle"><h3 class="text-base font-semibold text-gray-900 mt-6 mb-2">Proposition & acompte 40 %</h3><p class="text-gray-600 text-sm">Un devis clair, un délai précis, on démarre.</p><span class="text-primary text-xs font-medium inline-flex items-center gap-1 mt-2 cursor-pointer">En savoir plus <i class="ri-arrow-down-s-line" aria-hidden="true"></i></span></div><p class="step-detail text-gray-500 text-xs text-left px-2">Vous recevez un devis détaillé (fonctionnalités, délai, prix). Un acompte de 40 % valide le démarrage ; le solde n'est dû qu'à la livraison.</p></div>
 <div class="process-step reveal reveal-delay-2 text-center relative">
 <div class="step-num w-16 h-16 mx-auto rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold shadow-lg shadow-primary/30 relative z-10">3</div>
-<h3 class="text-base font-semibold text-gray-900 mt-6 mb-2">Conception</h3>
-<p class="text-gray-600 text-sm">Maquette validée avec vous avant le développement.</p>
-</div>
+<div class="step-toggle"><h3 class="text-base font-semibold text-gray-900 mt-6 mb-2">Conception</h3><p class="text-gray-600 text-sm">Maquette validée avec vous avant le développement.</p><span class="text-primary text-xs font-medium inline-flex items-center gap-1 mt-2 cursor-pointer">En savoir plus <i class="ri-arrow-down-s-line" aria-hidden="true"></i></span></div><p class="step-detail text-gray-500 text-xs text-left px-2">Une maquette ou une structure de pages vous est présentée avant d'écrire la moindre ligne de code, pour éviter les mauvaises surprises.</p></div>
 <div class="process-step reveal reveal-delay-3 text-center relative">
 <div class="step-num w-16 h-16 mx-auto rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold shadow-lg shadow-primary/30 relative z-10">4</div>
-<h3 class="text-base font-semibold text-gray-900 mt-6 mb-2">Développement & tests</h3>
-<p class="text-gray-600 text-sm">Réalisation, avec des points d'étape réguliers.</p>
-</div>
+<div class="step-toggle"><h3 class="text-base font-semibold text-gray-900 mt-6 mb-2">Développement & tests</h3><p class="text-gray-600 text-sm">Réalisation, avec des points d'étape réguliers.</p><span class="text-primary text-xs font-medium inline-flex items-center gap-1 mt-2 cursor-pointer">En savoir plus <i class="ri-arrow-down-s-line" aria-hidden="true"></i></span></div><p class="step-detail text-gray-500 text-xs text-left px-2">Développement par itérations courtes, avec des points d'étape réguliers pour ajuster si besoin, et des tests avant chaque livraison.</p></div>
 <div class="process-step reveal reveal-delay-4 text-center relative">
 <div class="step-num w-16 h-16 mx-auto rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold shadow-lg shadow-primary/30 relative z-10">5</div>
-<h3 class="text-base font-semibold text-gray-900 mt-6 mb-2">Mise en ligne & suivi</h3>
-<p class="text-gray-600 text-sm">Déploiement, formation, et support inclus.</p>
-</div>
+<div class="step-toggle"><h3 class="text-base font-semibold text-gray-900 mt-6 mb-2">Mise en ligne & suivi</h3><p class="text-gray-600 text-sm">Déploiement, formation, et support inclus.</p><span class="text-primary text-xs font-medium inline-flex items-center gap-1 mt-2 cursor-pointer">En savoir plus <i class="ri-arrow-down-s-line" aria-hidden="true"></i></span></div><p class="step-detail text-gray-500 text-xs text-left px-2">Mise en ligne, formation à la prise en main, et un mois de support inclus pour corriger tout ajustement nécessaire.</p></div>
 </div>
 </div>
 </section>
@@ -657,12 +537,20 @@ Demander un devis
 </div>
 </div>
 
-<!-- Emplacement témoignages : composant réutilisable, prêt à être rempli avec de vrais avis clients -->
+<!-- Témoignages (#13) : rendu par js/modules/testimonials.js depuis js/data/testimonials.js.
+     Tant qu'aucun avis réel n'est ajouté, le message "à venir" ci-dessous reste affiché. -->
 <div class="reveal reveal-delay-4">
 <div class="testimonial-placeholder rounded-xl p-10 text-center bg-white/50" data-testimonials-slot>
 <i class="ri-chat-quote-line text-4xl text-gray-300 mb-3" aria-hidden="true"></i>
-<p class="text-gray-500 max-w-xl mx-auto">Les avis de nos premiers clients apparaîtront ici prochainement. <!-- TODO(Babacar) : remplacer ce bloc par de vrais témoignages (nom, entreprise, citation) au fur et à mesure des projets livrés --></p>
+<p class="text-gray-500 max-w-xl mx-auto">Les avis de nos premiers clients apparaîtront ici prochainement. <!-- TODO(Babacar) : ajoutez vos témoignages dans js/data/testimonials.js dès qu'un client accepte d'en laisser un --></p>
 </div>
+<div id="testimonialsGrid" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+</div>
+
+<!-- Logos clients (#14) : masqué tant que js/data/testimonials.js -> WSHOP_CLIENT_LOGOS est vide -->
+<div class="hidden mt-16 text-center reveal" data-client-logos-section>
+<p class="text-sm text-gray-500 uppercase tracking-wide mb-6">Ils nous ont fait confiance</p>
+<div class="client-logos-strip" id="clientLogosStrip"></div>
 </div>
 </div>
 </section>
@@ -791,10 +679,16 @@ Demander un devis
 <section id="faq" class="py-20 bg-gray-50">
 <div class="container mx-auto px-4">
 <div class="text-center mb-16 reveal">
-<span class="text-primary font-semibold uppercase tracking-wide text-sm">Questions fréquentes</span>
-<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">On répond à vos questions</h2>
+<span class="text-primary font-semibold uppercase tracking-wide text-sm" data-i18n="faq.eyebrow">Questions fréquentes</span>
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4" data-i18n="faq.title">On répond à vos questions</h2>
 <p class="text-lg text-gray-700 max-w-3xl mx-auto">Tout ce que vous devez savoir avant de vous lancer avec Wshop.</p>
 </div>
+<!-- Recherche FAQ (#23) -->
+<div class="faq-search-wrap reveal">
+<i class="ri-search-line" aria-hidden="true"></i>
+<input type="search" id="faqSearchInput" data-i18n-placeholder="faq.search.placeholder" placeholder="Rechercher une question...">
+</div>
+<p class="faq-no-results" id="faqNoResults">Aucune question ne correspond à votre recherche. <a href="#contact" class="text-primary hover:underline">Posez-la nous directement</a>.</p>
 <div class="max-w-3xl mx-auto space-y-4 reveal">
 <details class="faq-item bg-white rounded-lg shadow-sm p-6" open>
 <summary class="flex items-center justify-between font-semibold text-gray-900 gap-4">
@@ -872,17 +766,61 @@ Faites-vous uniquement des logos ?
 </div>
 </section>
 
+<!-- Prise de rendez-vous (#20) -->
+<section id="rdv" class="py-20 bg-white">
+<div class="container mx-auto px-4">
+<div class="text-center mb-12 reveal max-w-2xl mx-auto">
+<span class="text-primary font-semibold uppercase tracking-wide text-sm">Sur rendez-vous</span>
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">Réservez un appel de cadrage</h2>
+<p class="text-lg text-gray-700">15 à 30 minutes pour parler de votre projet directement de vive voix, sans engagement.</p>
+</div>
+<div class="max-w-3xl mx-auto reveal">
+<div id="bookingFrameWrap" class="booking-frame-wrap hidden"></div>
+<div id="bookingFallback" class="hidden text-center bg-gray-50 rounded-xl p-10">
+<i class="ri-calendar-event-line text-4xl text-primary mb-4" aria-hidden="true"></i>
+<p class="text-gray-700 mb-6">L'agenda en ligne n'est pas encore activé. En attendant, proposez-nous un créneau directement sur WhatsApp.</p>
+<a href="#" target="_blank" rel="noopener" class="bg-primary text-white px-6 py-3 !rounded-button font-medium inline-flex items-center gap-2">
+<i class="fab fa-whatsapp" aria-hidden="true"></i> Proposer un créneau sur WhatsApp
+</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Newsletter (#32) -->
+<section class="py-16 bg-gray-50">
+<div class="container mx-auto px-4">
+<div class="newsletter-box max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-8">
+<div class="flex-1 text-center md:text-left">
+<h2 class="text-xl md:text-2xl font-bold mb-2" data-i18n="newsletter.title">Recevez nos conseils digitaux</h2>
+<p class="text-white/80 text-sm" data-i18n="newsletter.subtitle">Un email occasionnel avec des conseils pratiques pour les PME sénégalaises. Pas de spam.</p>
+</div>
+<form id="newsletterForm" class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+<input type="email" required data-i18n-placeholder="newsletter.placeholder" placeholder="votre@email.com" class="sm:w-64">
+<button type="submit" class="bg-accent text-white px-6 py-3 !rounded-button font-medium whitespace-nowrap min-h-[44px]" data-i18n="newsletter.cta">S'inscrire</button>
+<p class="newsletter-note hidden basis-full" data-newsletter-feedback></p>
+</form>
+</div>
+</div>
+</section>
+
 <!-- Contact Section -->
 <section id="contact" class="py-20 bg-white">
 <div class="container mx-auto px-4">
 <div class="text-center mb-16 reveal">
-<span class="text-primary font-semibold uppercase tracking-wide text-sm">Parlons de votre projet</span>
-<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">Contactez-nous</h2>
+<span class="text-primary font-semibold uppercase tracking-wide text-sm" data-i18n="contact.eyebrow">Parlons de votre projet</span>
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4" data-i18n="contact.title">Contactez-nous</h2>
 <p class="text-lg text-gray-700 max-w-3xl mx-auto">Un projet en tête ? Remplissez le formulaire ci-dessous : il ouvre WhatsApp avec votre message déjà prêt, ou utilisez l'email en secours.</p>
 </div>
 <div class="flex flex-col lg:flex-row gap-12">
 <div class="lg:w-7/12 reveal">
+<!-- Barre de progression du formulaire multi-étapes (#17) -->
+<div class="mb-6">
+<div class="h-1.5 bg-gray-200 rounded-full overflow-hidden"><div id="contactProgressBar" class="h-full bg-primary transition-all" style="width:33%"></div></div>
+<p id="contactProgressLabel" class="text-xs text-gray-500 mt-2">Étape 1 sur 3</p>
+</div>
 <form id="contactForm" class="space-y-6" novalidate>
+<div data-step="1">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div>
 <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Nom complet</label>
@@ -895,12 +833,18 @@ Faites-vous uniquement des logos ?
 <p class="field-error-msg hidden" data-error-for="email">Veuillez saisir un email valide.</p>
 </div>
 </div>
+<div class="flex justify-end mt-6">
+<button type="button" data-step-next class="bg-primary text-white px-8 py-3 !rounded-button font-medium whitespace-nowrap min-h-[44px] inline-flex items-center gap-2">Suivant <i class="ri-arrow-right-line" aria-hidden="true"></i></button>
+</div>
+</div>
+
+<div data-step="2" class="hidden">
 <div>
 <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Téléphone</label>
 <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-primary" placeholder="+221 XX XXX XX XX" required>
 <p class="field-error-msg hidden" data-error-for="phone">Veuillez saisir votre numéro de téléphone.</p>
 </div>
-<div>
+<div class="mt-6">
 <label for="service" class="block text-sm font-medium text-gray-700 mb-2">Service souhaité</label>
 <div class="relative">
 <select id="service" name="service" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-primary appearance-none pr-8">
@@ -916,10 +860,23 @@ Faites-vous uniquement des logos ?
 </div>
 </div>
 </div>
-<div>
+<div class="mt-6">
 <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Votre projet</label>
 <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-primary" placeholder="Décrivez votre projet en quelques mots..." required></textarea>
 <p class="field-error-msg hidden" data-error-for="message">Veuillez décrire votre projet.</p>
+</div>
+<div class="flex justify-between mt-6">
+<button type="button" data-step-prev class="bg-white text-gray-700 border border-gray-300 px-8 py-3 !rounded-button font-medium whitespace-nowrap min-h-[44px] inline-flex items-center gap-2"><i class="ri-arrow-left-line" aria-hidden="true"></i> Précédent</button>
+<button type="button" data-step-next class="bg-primary text-white px-8 py-3 !rounded-button font-medium whitespace-nowrap min-h-[44px] inline-flex items-center gap-2">Suivant <i class="ri-arrow-right-line" aria-hidden="true"></i></button>
+</div>
+</div>
+
+<div data-step="3" class="hidden">
+<div class="bg-gray-50 rounded-lg p-5 mb-6 text-sm text-gray-700 space-y-1">
+<p><span class="font-medium">Nom :</span> <span data-step-recap="name">—</span></p>
+<p><span class="font-medium">Email :</span> <span data-step-recap="email">—</span></p>
+<p><span class="font-medium">Téléphone :</span> <span data-step-recap="phone">—</span></p>
+<p><span class="font-medium">Service :</span> <span data-step-recap="service">—</span></p>
 </div>
 <div>
 <label class="custom-checkbox">
@@ -929,7 +886,8 @@ Faites-vous uniquement des logos ?
 </label>
 <p class="field-error-msg hidden" data-error-for="privacy">Veuillez accepter la politique de confidentialité.</p>
 </div>
-<div class="flex flex-col sm:flex-row gap-3">
+<div class="flex flex-col sm:flex-row gap-3 mt-6">
+<button type="button" data-step-prev class="bg-white text-gray-700 border border-gray-300 px-8 py-3 !rounded-button font-medium hover:bg-gray-50 transition-colors whitespace-nowrap w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2"><i class="ri-arrow-left-line" aria-hidden="true"></i> Précédent</button>
 <button type="submit" class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2">
 <i class="fab fa-whatsapp" aria-hidden="true"></i> Envoyer sur WhatsApp
 </button>
@@ -937,9 +895,10 @@ Faites-vous uniquement des logos ?
 <i class="ri-mail-line" aria-hidden="true"></i> Envoyer par email
 </a>
 </div>
-<div id="formFeedback" class="items-center gap-2 bg-primary/10 text-primary px-4 py-3 rounded" role="status" aria-live="polite">
+<div id="formFeedback" class="items-center gap-2 bg-primary/10 text-primary px-4 py-3 rounded mt-4" role="status" aria-live="polite">
 <i class="ri-checkbox-circle-fill" aria-hidden="true"></i>
 <span>Merci ! WhatsApp s'ouvre avec votre message pré-rempli — il ne reste qu'à l'envoyer.</span>
+</div>
 </div>
 </form>
 </div>
@@ -1016,7 +975,7 @@ Faites-vous uniquement des logos ?
 <a href="#accueil" class="inline-flex items-center mb-4">
 <img src="images/logo-metal.webp" alt="Wshop" style="height:36px; width:auto;">
 </a>
-<p class="text-gray-400 mb-6">Rendre le digital accessible, honnête et abordable pour les PME, startups et professionnels sénégalais.</p>
+<p class="text-gray-400 mb-6" data-i18n="footer.tagline">Rendre le digital accessible, honnête et abordable pour les PME, startups et professionnels sénégalais.</p>
 <div class="flex space-x-4">
 <a href="https://github.com/BabacarDiop02" target="_blank" rel="noopener" aria-label="GitHub" class="text-gray-400 hover:text-white transition-colors">
 <i class="ri-github-fill ri-lg" aria-hidden="true"></i>
@@ -1031,12 +990,15 @@ Faites-vous uniquement des logos ?
 </div>
 <!-- Quick Links -->
 <div>
-<h4 class="text-lg font-semibold mb-6">Liens rapides</h4>
+<h4 class="text-lg font-semibold mb-6" data-i18n="footer.quicklinks">Liens rapides</h4>
 <ul class="space-y-3">
 <li><a href="#accueil" class="text-gray-400 hover:text-white transition-colors">Accueil</a></li>
 <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Nos services</a></li>
 <li><a href="#tarifs" class="text-gray-400 hover:text-white transition-colors">Tarifs</a></li>
 <li><a href="#realisations" class="text-gray-400 hover:text-white transition-colors">Réalisations</a></li>
+<li><a href="blog.html" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+<li><a href="glossaire.html" class="text-gray-400 hover:text-white transition-colors">Glossaire</a></li>
+<li><a href="suivi-projet.html" class="text-gray-400 hover:text-white transition-colors">Suivi de projet</a></li>
 <li><a href="#apropos" class="text-gray-400 hover:text-white transition-colors">À propos</a></li>
 <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
 <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
@@ -1094,6 +1056,53 @@ Faites-vous uniquement des logos ?
 <i class="ri-arrow-up-line" aria-hidden="true"></i>
 </button>
 
-<script src="script.js?v=7"></script>
+<!-- Calculateur de devis (#16) -->
+<div id="quoteCalcModal" role="dialog" aria-modal="true" aria-labelledby="quoteCalcTitle">
+<div class="quote-calc-panel">
+<button type="button" class="quote-calc-close" aria-label="Fermer le calculateur"><i class="ri-close-line" aria-hidden="true"></i></button>
+<h2 id="quoteCalcTitle" class="text-2xl font-bold text-gray-900 mb-1" data-i18n="calc.title">Estimez votre projet</h2>
+<p class="text-gray-600 mb-6" data-i18n="calc.subtitle">Quelques questions pour vous donner une fourchette de prix indicative.</p>
+<h3 class="font-semibold text-gray-900 mb-3">Type de projet</h3>
+<div class="space-y-2 mb-6" data-calc-types></div>
+<h3 class="font-semibold text-gray-900 mb-3">Options</h3>
+<div class="space-y-2 mb-6" data-calc-options></div>
+<div class="quote-calc-total mb-6" data-calc-total></div>
+<a href="#" target="_blank" rel="noopener" class="bg-secondary text-white px-6 py-3 !rounded-button font-medium w-full text-center inline-flex items-center justify-center gap-2" data-calc-cta>
+<i class="fab fa-whatsapp" aria-hidden="true"></i> Obtenir un devis précis sur WhatsApp
+</a>
+</div>
+</div>
+
+<!-- Bannière d'installation PWA (#30) -->
+<div id="pwaInstallBanner">
+<i class="ri-download-2-line text-2xl text-primary" aria-hidden="true"></i>
+<div class="flex-1">
+<p class="font-medium text-gray-900 text-sm">Installer Wshop</p>
+<p class="text-gray-500 text-xs">Accès rapide depuis votre écran d'accueil, même hors-ligne.</p>
+</div>
+<button type="button" data-pwa-install class="bg-primary text-white text-sm px-4 py-2 !rounded-button font-medium whitespace-nowrap">Installer</button>
+<button type="button" data-pwa-dismiss aria-label="Fermer" class="text-gray-400 px-1"><i class="ri-close-line" aria-hidden="true"></i></button>
+</div>
+
+<script src="js/data/site-config.js?v=1"></script>
+<script src="js/data/projects.js?v=1"></script>
+<script src="js/data/testimonials.js?v=1"></script>
+<script src="js/i18n/fr.js?v=1"></script>
+<script src="js/i18n/en.js?v=1"></script>
+<script src="js/modules/analytics.js?v=1"></script>
+<script src="js/modules/theme.js?v=1"></script>
+<script src="js/modules/i18n.js?v=1"></script>
+<script src="js/modules/portfolio.js?v=1"></script>
+<script src="js/modules/quote-calculator.js?v=1"></script>
+<script src="js/modules/faq-search.js?v=1"></script>
+<script src="js/modules/availability.js?v=1"></script>
+<script src="js/modules/booking.js?v=1"></script>
+<script src="js/modules/process-timeline.js?v=1"></script>
+<script src="js/modules/testimonials.js?v=1"></script>
+<script src="js/modules/newsletter.js?v=1"></script>
+<script src="js/modules/contact-steps.js?v=1"></script>
+<script src="js/modules/emailjs-send.js?v=1"></script>
+<script src="js/modules/pwa-register.js?v=1"></script>
+<script src="script.js?v=8"></script>
 </body>
 </html>

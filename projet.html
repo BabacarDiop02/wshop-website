@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1E5AF5">
+<title data-page-title>Projet — Wshop</title>
+<meta name="description" data-page-description content="Détail d'une réalisation Wshop : contexte, stack technique et résultats.">
+<link rel="canonical" href="https://babacardiop02.github.io/wshop-website/projet.html">
+<meta name="robots" content="index,follow">
+
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="favicon.ico">
+<link rel="manifest" href="manifest.json">
+
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#1E5AF5',secondary:'#0F172A',accent:'#FF7A00'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('wshop-theme');
+      var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      if (theme === 'dark') document.documentElement.classList.add('dark');
+      document.documentElement.classList.add('theme-init');
+    } catch (e) {}
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="css/dark-mode.css?v=1">
+<link rel="stylesheet" href="css/portfolio.css?v=1">
+<link rel="stylesheet" href="css/components.css?v=1">
+</head>
+<body class="bg-white">
+<a href="#main" class="skip-link">Aller au contenu principal</a>
+
+<header id="mainHeader" class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md shadow-sm z-50">
+<div class="container mx-auto px-4 py-4 flex items-center justify-between">
+<a href="index.html#accueil" class="flex items-center">
+<img src="images/logo-navy.webp" alt="Wshop" style="height:36px; width:auto;">
+</a>
+<nav class="hidden md:flex items-center space-x-7" aria-label="Navigation principale">
+<a href="index.html#services" class="nav-link text-gray-800 hover:text-primary font-medium transition-colors" data-i18n="nav.services">Services</a>
+<a href="index.html#realisations" class="nav-link text-gray-800 hover:text-primary font-medium transition-colors" data-i18n="nav.projects">Réalisations</a>
+<a href="blog.html" class="nav-link text-gray-800 hover:text-primary font-medium transition-colors" data-i18n="nav.blog">Blog</a>
+<a href="index.html#faq" class="nav-link text-gray-800 hover:text-primary font-medium transition-colors" data-i18n="nav.faq">FAQ</a>
+<button id="themeToggle" aria-label="Basculer le mode sombre"><i class="ri-moon-line" aria-hidden="true"></i><i class="ri-sun-line" aria-hidden="true"></i></button>
+<div id="langToggle" role="group" aria-label="Choix de la langue">
+<button data-lang="fr" type="button">FR</button><button data-lang="en" type="button">EN</button>
+</div>
+<a href="index.html#contact" class="bg-secondary text-white px-5 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap" data-i18n="nav.cta">Demander un devis</a>
+</nav>
+<button class="md:hidden w-11 h-11 flex items-center justify-center cursor-pointer" id="mobileMenuBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+<i class="ri-menu-line ri-lg" aria-hidden="true"></i>
+</button>
+</div>
+<div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+<div class="container mx-auto px-4 py-4 flex flex-col space-y-2">
+<a href="index.html#services" class="text-gray-800 hover:text-primary font-medium py-3">Services</a>
+<a href="index.html#realisations" class="text-gray-800 hover:text-primary font-medium py-3">Réalisations</a>
+<a href="blog.html" class="text-gray-800 hover:text-primary font-medium py-3">Blog</a>
+<a href="index.html#faq" class="text-gray-800 hover:text-primary font-medium py-3">FAQ</a>
+<a href="index.html#contact" class="bg-secondary text-white px-5 py-3 !rounded-button font-medium text-center mt-2">Demander un devis</a>
+</div>
+</div>
+</header>
+
+<main id="main" class="subpage-hero">
+<div class="container mx-auto px-4">
+<nav class="breadcrumb text-sm mb-8" aria-label="Fil d'Ariane">
+<a href="index.html#accueil">Accueil</a> <span aria-hidden="true">/</span>
+<a href="index.html#realisations">Réalisations</a> <span aria-hidden="true">/</span>
+<span id="breadcrumbCurrent" class="text-gray-900 font-medium">Projet</span>
+</nav>
+
+<div id="projectDetail" class="max-w-5xl mx-auto">
+<p id="projectLoadError" class="hidden text-center py-20 text-gray-600">
+Projet introuvable. <a href="index.html#realisations" class="text-primary hover:underline">Retour aux réalisations</a>.
+</p>
+</div>
+</div>
+</main>
+
+<div id="projectLightbox" class="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Aperçu agrandi">
+<button class="lightbox-close" data-lightbox-close aria-label="Fermer l'aperçu"><i class="ri-close-line" aria-hidden="true"></i></button>
+<img src="" alt="" data-lightbox-img>
+</div>
+
+<footer class="bg-gray-900 text-white pt-16 pb-8">
+<div class="container mx-auto px-4 text-center">
+<a href="index.html#accueil" class="inline-flex items-center mb-6">
+<img src="images/logo-metal.webp" alt="Wshop" style="height:32px; width:auto;">
+</a>
+<div class="flex justify-center gap-6 mb-8 text-gray-400">
+<a href="index.html#services" class="hover:text-white">Services</a>
+<a href="index.html#tarifs" class="hover:text-white">Tarifs</a>
+<a href="index.html#realisations" class="hover:text-white">Réalisations</a>
+<a href="blog.html" class="hover:text-white">Blog</a>
+<a href="glossaire.html" class="hover:text-white">Glossaire</a>
+<a href="index.html#contact" class="hover:text-white">Contact</a>
+</div>
+<p class="text-gray-500 text-sm">&copy; 2025 Wshop. Tous droits réservés.</p>
+</div>
+</footer>
+
+<a href="https://wa.me/221776947150" target="_blank" rel="noopener" id="whatsappFloat" aria-label="Contacter Wshop sur WhatsApp">
+<i class="ri-whatsapp-line" aria-hidden="true"></i>
+</a>
+<button id="backToTop" aria-label="Retour en haut de page">
+<i class="ri-arrow-up-line" aria-hidden="true"></i>
+</button>
+
+<script src="js/data/site-config.js?v=1"></script>
+<script src="js/data/projects.js?v=1"></script>
+<script src="js/i18n/fr.js?v=1"></script>
+<script src="js/i18n/en.js?v=1"></script>
+<script src="js/modules/theme.js?v=1"></script>
+<script src="js/modules/i18n.js?v=1"></script>
+<script src="js/modules/pwa-register.js?v=1"></script>
+<script src="js/modules/project-detail.js?v=1"></script>
+<script src="script.js?v=8"></script>
+</body>
+</html>

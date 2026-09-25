@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1E5AF5">
+<title data-page-title>Article — Blog Wshop</title>
+<meta name="description" data-page-description content="Article du blog Wshop.">
+<link rel="canonical" href="https://babacardiop02.github.io/wshop-website/article.html">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="manifest" href="manifest.json">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#1E5AF5',secondary:'#0F172A',accent:'#FF7A00'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<script>(function(){try{var s=localStorage.getItem('wshop-theme');var t=s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(t==='dark')document.documentElement.classList.add('dark');document.documentElement.classList.add('theme-init');}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="css/dark-mode.css?v=1">
+<link rel="stylesheet" href="css/components.css?v=1">
+</head>
+<body class="bg-white">
+<a href="#main" class="skip-link">Aller au contenu principal</a>
+<header id="mainHeader" class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md shadow-sm z-50">
+<div class="container mx-auto px-4 py-4 flex items-center justify-between">
+<a href="index.html#accueil" class="flex items-center"><img src="images/logo-navy.webp" alt="Wshop" style="height:36px; width:auto;"></a>
+<nav class="hidden md:flex items-center space-x-7" aria-label="Navigation principale">
+<a href="index.html#services" class="text-gray-800 hover:text-primary font-medium">Services</a>
+<a href="blog.html" class="text-gray-800 hover:text-primary font-medium">Blog</a>
+<button id="themeToggle" aria-label="Basculer le mode sombre"><i class="ri-moon-line" aria-hidden="true"></i><i class="ri-sun-line" aria-hidden="true"></i></button>
+<a href="index.html#contact" class="bg-secondary text-white px-5 py-2 !rounded-button font-medium whitespace-nowrap">Demander un devis</a>
+</nav>
+<button class="md:hidden w-11 h-11 flex items-center justify-center" id="mobileMenuBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu"><i class="ri-menu-line ri-lg" aria-hidden="true"></i></button>
+</div>
+<div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+<div class="container mx-auto px-4 py-4 flex flex-col space-y-2">
+<a href="index.html#services" class="text-gray-800 py-3">Services</a>
+<a href="blog.html" class="text-gray-800 py-3">Blog</a>
+<a href="index.html#contact" class="bg-secondary text-white px-5 py-3 !rounded-button font-medium text-center mt-2">Demander un devis</a>
+</div>
+</div>
+</header>
+
+<main id="main" class="subpage-hero">
+<div class="container mx-auto px-4">
+<nav class="breadcrumb text-sm mb-8" aria-label="Fil d'Ariane">
+<a href="index.html#accueil">Accueil</a> <span aria-hidden="true">/</span> <a href="blog.html">Blog</a> <span aria-hidden="true">/</span> <span id="breadcrumbCurrent" class="text-gray-900 font-medium">Article</span>
+</nav>
+<article id="articleContent" class="blog-article max-w-3xl mx-auto">
+<p id="articleLoadError" class="hidden text-center py-20 text-gray-600">Article introuvable. <a href="blog.html" class="text-primary hover:underline">Retour au blog</a>.</p>
+</article>
+</div>
+</main>
+
+<footer class="bg-gray-900 text-white pt-16 pb-8">
+<div class="container mx-auto px-4 text-center">
+<a href="index.html#accueil" class="inline-flex items-center mb-6"><img src="images/logo-metal.webp" alt="Wshop" style="height:32px; width:auto;"></a>
+<p class="text-gray-500 text-sm">&copy; 2025 Wshop. Tous droits réservés.</p>
+</div>
+</footer>
+<a href="https://wa.me/221776947150" target="_blank" rel="noopener" id="whatsappFloat" aria-label="Contacter Wshop sur WhatsApp"><i class="ri-whatsapp-line" aria-hidden="true"></i></a>
+<button id="backToTop" aria-label="Retour en haut de page"><i class="ri-arrow-up-line" aria-hidden="true"></i></button>
+
+<script src="js/data/site-config.js?v=1"></script>
+<script src="js/data/blog.js?v=1"></script>
+<script src="js/modules/theme.js?v=1"></script>
+<script src="js/modules/pwa-register.js?v=1"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var slug = new URLSearchParams(window.location.search).get('slug');
+  var article = (window.WSHOP_BLOG || []).filter(function (a) { return a.slug === slug; })[0];
+  var content = document.getElementById('articleContent');
+  if (!article) {
+    document.getElementById('articleLoadError').classList.remove('hidden');
+    return;
+  }
+  document.title = article.title + ' — Blog Wshop';
+  var desc = document.querySelector('[data-page-description]');
+  if (desc) desc.setAttribute('content', article.excerpt);
+  document.getElementById('breadcrumbCurrent').textContent = article.title;
+  var formattedDate = new Date(article.date + 'T00:00:00').toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+  content.innerHTML =
+    '<span class="blog-meta">' + article.category + ' · ' + formattedDate + ' · ' + article.readingTime + ' de lecture</span>' +
+    '<h1 class="text-3xl md:text-4xl font-bold text-gray-900 mt-3 mb-8">' + article.title + '</h1>' +
+    article.html +
+    '<div class="mt-12 pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">' +
+      '<p class="text-gray-700">Un projet en tête après cette lecture ?</p>' +
+      '<a href="index.html#contact" class="bg-primary text-white px-6 py-3 !rounded-button font-medium whitespace-nowrap">Demander un devis gratuit</a>' +
+    '</div>';
+});
+</script>
+<script src="script.js?v=8"></script>
+</body>
+</html>

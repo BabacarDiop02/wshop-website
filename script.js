@@ -94,29 +94,9 @@ document.addEventListener('DOMContentLoaded', function() {
   counters.forEach(el => statObserver.observe(el));
 });
 
-// Project filter
-document.addEventListener('DOMContentLoaded', function() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const projectCards = document.querySelectorAll('.project-card');
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-      filterBtns.forEach(b => {
-        b.classList.remove('active', 'bg-primary', 'text-white');
-        b.classList.add('bg-white', 'text-gray-700');
-      });
-      this.classList.add('active', 'bg-primary', 'text-white');
-      this.classList.remove('bg-white', 'text-gray-700');
-      const filter = this.getAttribute('data-filter');
-      projectCards.forEach(card => {
-        if (filter === 'all' || card.getAttribute('data-category') === filter) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  });
-});
+// Le filtrage des réalisations (recherche, tri, catégories, pagination) est
+// géré par js/modules/portfolio.js, qui rend la grille dynamiquement à
+// partir de js/data/projects.js.
 
 // Contact form: validation + envoi via WhatsApp pré-rempli (avec secours email)
 // GitHub Pages n'a pas de backend : aucune donnée n'est stockée, tout part vers WhatsApp/email.
