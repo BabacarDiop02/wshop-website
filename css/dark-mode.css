@@ -64,6 +64,36 @@ html.dark img[src*="logo-metal"] {
 /* Header */
 html.dark #mainHeader.scrolled { box-shadow: 0 4px 20px rgba(0, 0, 0, .5); }
 
+/* Fond défilant du hero (#26 fix) : le calque de fondu est peint en blanc en
+   dur dans style.css pour se fondre avec un fond clair — en mode sombre il
+   fallait un fondu vers le fond sombre, sinon le texte du hero (rendu clair
+   par les règles ci-dessus) se retrouve sur un calque resté blanc, donc
+   illisible. */
+html.dark .hero-scroll-overlay {
+  background: linear-gradient(90deg, #0b1220 0%, #0b1220 32%, rgba(11,18,32,.88) 50%, rgba(11,18,32,.55) 68%, rgba(11,18,32,.25) 100%),
+              linear-gradient(0deg, #0b1220 0%, rgba(11,18,32,0) 18%, rgba(11,18,32,0) 82%, #0b1220 100%);
+}
+
+/* Composants annexes utilisant un fond blanc en dur (non couvert par les
+   classes Tailwind ci-dessus) */
+html.dark .testimonial-card,
+html.dark .blog-card,
+html.dark .project-skeleton,
+html.dark .portfolio-search input,
+html.dark .portfolio-sort,
+html.dark .faq-search-wrap input,
+html.dark .availability-badge {
+  background-color: #111827;
+  border-color: #263140;
+  color: #e2e8f0;
+}
+html.dark .portfolio-search input::placeholder,
+html.dark .faq-search-wrap input::placeholder { color: #64748b; }
+
+html.dark .quote-calc-option { border-color: #263140; }
+html.dark .quote-calc-option:hover { border-color: rgba(30,90,245,.5); }
+html.dark .quote-calc-option.selected { background: rgba(30,90,245,.15); }
+
 /* Bouton bascule thème */
 #themeToggle {
   width: 40px;
